@@ -1,4 +1,4 @@
-import { LogoutButton } from "@/features/auth";
+import { LogoutButton } from "@/features";
 import {
   Avatar,
   AvatarFallback,
