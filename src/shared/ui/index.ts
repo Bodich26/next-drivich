@@ -4,4 +4,7 @@ export * from "./form";
 export * from "./input";
 export * from "./label";
 export * from "./sheet";
+export * from "./decor-line";
 export { SocialsIcon } from "./socials-icon";
+export * from "./avatar";
+export * from "./dropdown-menu";
