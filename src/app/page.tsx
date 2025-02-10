@@ -1,10 +1,14 @@
-import { Footer, Header } from "@/widgets";
+import { ProductDate } from "@/entities";
+import { Container } from "@/shared";
+import { Footer, Header, ProductList } from "@/widgets";
 
 export default function Home() {
   return (
     <>
       <Header />
-      <h1>Hello bogdan</h1>
+      <Container>
+        <ProductList products={ProductDate} variant="cart" />
+      </Container>
       <Footer />
     </>
   );

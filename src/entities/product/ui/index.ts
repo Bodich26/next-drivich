@@ -1,1 +1,3 @@
-export * from "./product-card";
+export * from "./catalog-product-card";
+export * from "./cart-product-card";
+export * from "./favorite-product-card";
