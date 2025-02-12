@@ -1,15 +1,5 @@
-import { ProductDate } from "@/entities";
-import { Container } from "@/shared";
-import { Footer, Header, ProductList } from "@/widgets";
+import { HomePage } from "@/pages/home/home-page";
 
 export default function Home() {
-  return (
-    <>
-      <Header />
-      <Container>
-        <ProductList products={ProductDate} variant="cart" />
-      </Container>
-      <Footer />
-    </>
-  );
+  return <HomePage />;
 }

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ProductType } from "../model";
 import { ButtonQuantity } from "@/features";
 import { SalesProduct } from "./discount-product";
-import { Badge } from "@/shared";
+import { BadgeSales } from "@/shared";
 
 type ProductCardProps = {
   product: ProductType;
@@ -49,7 +49,10 @@ export const CartProductCard = ({ product }: ProductCardProps) => {
               <ButtonQuantity />
             </td>
             <td className="w-[40px]">
-              <span className="w-[19px] h-[19px] block rounded-full bg-primary"></span>
+              <span
+                className="w-[19px] h-[19px] block rounded-full"
+                style={{ backgroundColor: product.color }}
+              ></span>
             </td>
           </tr>
         </tbody>
@@ -61,11 +64,7 @@ export const CartProductCard = ({ product }: ProductCardProps) => {
         alt={product.model}
         className="rounded-md relative"
       />
-      {product.discount && (
-        <Badge className="px-[6px] py-[1px] absolute top-4 right-4 uppercase text-center font-medium">
-          Sale
-        </Badge>
-      )}
+      {product.discount! > 0 && <BadgeSales />}
     </div>
   );
 };
