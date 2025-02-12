@@ -55,7 +55,7 @@ export const ProductDate: ProductType[] = [
     engineType: "electro",
     batteryCapacity: 93.4,
     price: 151000,
-    discount: 0,
+    discount: 15,
   },
   {
     id: "5",
