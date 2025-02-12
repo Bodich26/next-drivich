@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ProductType } from "../model";
+import { ProductType, PriceProduct } from "@/entities";
 import { ButtonQuantity } from "@/features";
-import { SalesProduct } from "./discount-product";
 import { BadgeSales } from "@/shared";
 
 type ProductCardProps = {
@@ -42,7 +41,11 @@ export const CartProductCard = ({ product }: ProductCardProps) => {
               ${product.price?.toLocaleString("en-US")}
             </td>
             <td className="w-[160px] text-lg font-bold">
-              <SalesProduct price={product.price} discount={product.discount} />
+              <PriceProduct
+                price={product.price}
+                discount={product.discount}
+                variant="cart"
+              />
             </td>
             <td className="w-[120px]">
               <ButtonQuantity />
@@ -63,7 +66,7 @@ export const CartProductCard = ({ product }: ProductCardProps) => {
         alt={product.model}
         className="rounded-md relative"
       />
-      {product.discount! > 0 && <BadgeSales />}
+      <BadgeSales discount={product.discount} />
     </div>
   );
 };

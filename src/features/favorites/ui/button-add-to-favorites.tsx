@@ -14,7 +14,7 @@ export const ButtonAddToFavorites = () => {
       width={32}
       height={32}
       className={cn(
-        "stroke-primary absolute opacity-0 right-[12px] top-[12px] invisible group-hover:opacity-100 group-hover:visible cursor-pointer transition-all duration-300 ease-in-out",
+        "stroke-primary absolute opacity-0 left-[12px] top-[12px] invisible group-hover:opacity-100 group-hover:visible cursor-pointer transition-all duration-300 ease-in-out",
         active ? "fill-primary" : "fill-transparent"
       )}
     />

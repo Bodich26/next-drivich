@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ButtonAddToCart, ButtonAddToFavorites } from "@/features";
-import { DecorLine } from "@/shared";
-import { ProductType } from "../model";
+import { BadgeSales, DecorLine } from "@/shared";
+import { PriceProduct, ProductType } from "@/entities";
 
 type ProductCardProps = {
   product: ProductType;
@@ -12,6 +12,7 @@ export const CatalogProductCard = ({ product }: ProductCardProps) => {
   return (
     <div className="group max-w-[300px] hover-shadow-block relative">
       <div>
+        <BadgeSales discount={product.discount} />
         <ButtonAddToFavorites />
         <Image
           src={product.imageSrc}
@@ -65,11 +66,11 @@ export const CatalogProductCard = ({ product }: ProductCardProps) => {
         </div>
         <div className="flex items-end justify-between mt-4">
           <ButtonAddToCart variant="button" />
-          <div>
-            <p className="font-bold text-2xl">
-              ${product.price?.toLocaleString("en-US")}
-            </p>
-          </div>
+          <PriceProduct
+            price={product.price}
+            discount={product.discount}
+            variant="catalog"
+          />
         </div>
       </div>
     </div>

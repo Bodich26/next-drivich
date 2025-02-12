@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { DecorLine } from "@/shared";
-import { ProductType } from "../model";
+import { ProductType, PriceProduct } from "@/entities";
 import { ButtonAddToCart, ButtonDeleteFavorites } from "@/features";
 
 type ProductCardProps = {
@@ -30,12 +30,11 @@ export const FavoriteProductCard = ({ product }: ProductCardProps) => {
         </Link>
         <DecorLine />
         <div className="flex flex-row justify-between mt-[8px]">
-          <dl className="flex items-center gap-2">
-            <dt className="text-black-opacity75 text-base">Price: </dt>
-            <dd className="font-bold text-base">
-              ${product.price?.toLocaleString("en-US")}
-            </dd>
-          </dl>
+          <PriceProduct
+            price={product.price}
+            discount={product.discount}
+            variant="favorites"
+          />
           <ButtonAddToCart variant="icon" />
         </div>
       </div>

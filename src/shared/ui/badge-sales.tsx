@@ -1,9 +1,15 @@
 import { Badge } from "./badge";
 
-export const BadgeSales = () => {
+type BadgeSalesProps = {
+  discount?: number;
+};
+
+export const BadgeSales = ({ discount }: BadgeSalesProps) => {
   return (
-    <Badge className="px-[6px] py-[1px] absolute top-4 right-4 uppercase text-center font-medium">
-      Sale
-    </Badge>
+    discount! > 0 && (
+      <Badge className="px-[6px] py-[1px] absolute top-4 right-4 uppercase text-center font-medium">
+        Sale
+      </Badge>
+    )
   );
 };
