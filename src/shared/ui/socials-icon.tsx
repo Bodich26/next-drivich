@@ -9,11 +9,7 @@ export const SocialsIcon = () => {
           <li key={id} className="group">
             <Link href={link} target="_blank">
               {Icon && (
-                <Icon
-                  width={24}
-                  height={24}
-                  className="group-hover:stroke-primary cursor-pointer transition-all duration-300 ease-in-out"
-                />
+                <Icon width={24} height={24} className="hover-effect-icon" />
               )}
             </Link>
           </li>

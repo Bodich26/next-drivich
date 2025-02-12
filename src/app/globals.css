@@ -41,6 +41,10 @@ body {
   color: var(--color-black);
 }
 
+.hover-effect-icon:hover {
+  @apply hover:stroke-primary cursor-pointer transition-all duration-300 ease-in-out;
+}
+
 :root {
   --color-minimal-white: #e3e3ed;
   --color-minimal-light-white: #f2f2f8;

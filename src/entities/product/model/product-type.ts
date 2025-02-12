@@ -11,4 +11,5 @@ export type ProductType = {
   engineVolume?: number;
   batteryCapacity?: number;
   price: number;
+  discount?: number;
 };

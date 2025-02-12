@@ -26,6 +26,7 @@ export const ProductDate: ProductType[] = [
     engineType: "engine",
     engineVolume: 3.0,
     price: 135000,
+    discount: 10,
   },
   {
     id: "3",

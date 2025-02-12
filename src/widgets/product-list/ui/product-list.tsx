@@ -12,7 +12,7 @@ type ProductListProps = {
 
 export const ProductList = ({ products, variant }: ProductListProps) => {
   return (
-    <div>
+    <div className="flex justify-between flex-wrap gap-6">
       {products.map((product) => {
         if (variant === "catalog") {
           return <CatalogProductCard key={product.id} product={product} />;

@@ -8,3 +8,4 @@ export * from "./decor-line";
 export { SocialsIcon } from "./socials-icon";
 export * from "./avatar";
 export * from "./dropdown-menu";
+export * from "./badge";

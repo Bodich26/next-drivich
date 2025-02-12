@@ -2,32 +2,30 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ProductType } from "../model";
+import { ButtonQuantity } from "@/features";
+import { SalesProduct } from "./discount-product";
+import { Badge } from "@/shared";
 
 type ProductCardProps = {
   product: ProductType;
 };
 
+const featureProductsCart = ["car", "total", "price", "quantity", "color"];
+
 export const CartProductCard = ({ product }: ProductCardProps) => {
   return (
-    <div className="group max-w-full hover-shadow-block relative rounded-md p-[12px] bg-color-white">
+    <div className="group w-full hover-shadow-block relative rounded-md p-[12px] bg-color-white flex gap-4">
       <table className="w-full border-collapse">
         <thead>
           <tr>
-            <th className="text-left text-black-opacity75 text-base font-normal">
-              Car
-            </th>
-            <th className="text-left text-black-opacity75 text-base font-normal">
-              Total
-            </th>
-            <th className="text-left text-black-opacity75 text-base font-normal">
-              Price
-            </th>
-            <th className="text-left text-black-opacity75 text-base font-normal">
-              Quantity
-            </th>
-            <th className="text-left text-black-opacity75 text-base font-normal">
-              Color
-            </th>
+            {featureProductsCart.map((feature, index) => (
+              <th
+                key={index}
+                className="text-left text-black-opacity75 text-base font-normal capitalize"
+              >
+                {feature}
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
@@ -41,10 +39,18 @@ export const CartProductCard = ({ product }: ProductCardProps) => {
                 {product.model}
               </Link>
             </td>
-            <td>${product.price?.toLocaleString("en-US")}</td>
-            <td>${product.price?.toLocaleString("en-US")}</td>
-            <td>2</td>
-            <td>{product.color}</td>
+            <td className="w-[160px] text-lg font-bold">
+              ${product.price?.toLocaleString("en-US")}
+            </td>
+            <td className="w-[160px] text-lg font-bold">
+              <SalesProduct price={product.price} discount={product.discount} />
+            </td>
+            <td className="w-[120px]">
+              <ButtonQuantity />
+            </td>
+            <td className="w-[40px]">
+              <span className="w-[19px] h-[19px] block rounded-full bg-primary"></span>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -53,8 +59,13 @@ export const CartProductCard = ({ product }: ProductCardProps) => {
         width={179}
         height={98}
         alt={product.model}
-        className="rounded-md"
+        className="rounded-md relative"
       />
+      {product.discount && (
+        <Badge className="px-[6px] py-[1px] absolute top-4 right-4 uppercase text-center font-medium">
+          Sale
+        </Badge>
+      )}
     </div>
   );
 };
