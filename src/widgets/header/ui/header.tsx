@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/shared";
 import { UserDropdown } from "@/entities";
-import { CartButton, FavoritesButton, SigninButton } from "@/features";
+import { CartButton, ButtonOpenFavorites, SigninButton } from "@/features";
+import { FavoritesDrawer } from "@/widgets/favorites-drawer";
 
 export const Header = () => {
   return (
@@ -13,7 +14,9 @@ export const Header = () => {
             <Image src="/logo.svg" alt="logo" width={131} height={54} />
           </Link>
           <div className="flex gap-[15px] items-center">
-            <FavoritesButton />
+            <FavoritesDrawer>
+              <ButtonOpenFavorites />
+            </FavoritesDrawer>
             <CartButton />
             <UserDropdown />
             <SigninButton />
