@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { DecorLine } from "@/shared";
+import { BadgeSales, DecorLine } from "@/shared";
 import { ProductType, PriceProduct } from "@/entities";
 import { ButtonAddToCart, ButtonDeleteFavorites } from "@/features";
 
@@ -13,6 +13,7 @@ export const FavoriteProductCard = ({ product }: ProductCardProps) => {
     <div className="max-w-[300px] relative">
       <ButtonDeleteFavorites />
       <div>
+        <BadgeSales className="top-2 right-2" discount={product.discount} />
         <Image
           src={product.imageSrc}
           width={300}

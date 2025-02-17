@@ -9,7 +9,7 @@ export const HomePage = () => {
       <main className="flex flex-1 overflow-hidden">
         <Container className="flex flex-1 flex-col">
           <section className="flex-1 overflow-y-auto">
-            <ProductList products={ProductDate} variant="cart" />
+            <ProductList products={ProductDate} variant="catalog" />
           </section>
         </Container>
       </main>
