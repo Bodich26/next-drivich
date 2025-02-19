@@ -13,7 +13,7 @@ export const CatalogProductCard = ({ product }: ProductCardProps) => {
     <div className="group max-w-[300px] hover-shadow-block relative">
       <div>
         <BadgeSales discount={product.discount} />
-        <ButtonAddToFavorites />
+        <ButtonAddToFavorites variant="hover" />
         <Image
           src={product.imageSrc}
           width={300}

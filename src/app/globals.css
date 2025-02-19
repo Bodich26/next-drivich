@@ -13,6 +13,9 @@ body {
 .text-color-white {
   color: var(--color-white);
 }
+.text-color-black {
+  color: var(--color-black);
+}
 .bg-color-minimal-white {
   background-color: var(--color-minimal-white);
 }

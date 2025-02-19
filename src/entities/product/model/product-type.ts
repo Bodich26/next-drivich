@@ -5,9 +5,9 @@ export type ProductType = {
   imageSrc: string;
   power: number;
   speed?: number;
-  color?: string;
+  color?: Array<string>;
   acceleration?: number;
-  engineType?: "engine" | "electro";
+  engineType?: "engine" | "electro" | string;
   engineVolume?: number;
   batteryCapacity?: number;
   price: number;

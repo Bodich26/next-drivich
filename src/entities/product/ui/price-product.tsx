@@ -1,9 +1,10 @@
 import { calculateDiscountPrice } from "@/entities";
+import { cn } from "@/shared";
 
 type PriceProductProps = {
   price: number;
   discount?: number;
-  variant: "catalog" | "cart" | "favorites";
+  variant: "catalog" | "cart" | "favorites" | "main";
 };
 
 export const PriceProduct = ({
@@ -21,10 +22,24 @@ export const PriceProduct = ({
   );
 
   const oldPriceElement = hasDiscount > 0 && (
-    <span className="text-black/50 line-through text-[16px]">
+    <span
+      className={cn(
+        "text-black/50 line-through",
+        variant === "main" ? "text-xl" : "text-[16px]"
+      )}
+    >
       ${price.toLocaleString("en-US")}
     </span>
   );
+
+  if (variant === "main") {
+    return (
+      <div className="flex gap-3 items-end">
+        <span className="text-3xl font-medium">{priceElement}</span>
+        <span>{oldPriceElement}</span>
+      </div>
+    );
+  }
 
   if (variant === "favorites") {
     return (
