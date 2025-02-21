@@ -36,7 +36,7 @@ export const ProductDate: ProductType[] = [
     imageSrc: "https://imgur.com/FDLuqkt.png",
     power: 580,
     speed: 320,
-    color: ["0C0D0F"],
+    color: ["#0C0D0F"],
     acceleration: 2.8,
     engineType: "engine",
     engineVolume: 3.8,
