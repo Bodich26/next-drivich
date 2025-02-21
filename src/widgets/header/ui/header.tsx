@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Container } from "@/shared";
 import { UserDropdown } from "@/entities";
 import { CartButton, ButtonOpenFavorites, SigninButton } from "@/features";
-import { FavoritesDrawer } from "@/widgets/favorites-drawer";
+import { FavoritesDrawer } from "@/widgets";
 
 export const Header = () => {
   return (

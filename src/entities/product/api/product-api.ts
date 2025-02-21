@@ -1,4 +1,4 @@
-import { axiosInstance } from "@/shared/api/axios";
+import { axiosInstance } from "@/shared";
 import { ProductType } from "../model";
 
 export const fetchProducts = async (): Promise<ProductType[]> => {

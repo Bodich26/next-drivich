@@ -1,5 +1,5 @@
 "use client";
-
+import React from "react";
 import { ProductDate } from "@/entities";
 import { ButtonCloseFavorites } from "@/features";
 import {
@@ -10,7 +10,7 @@ import {
   SheetTitle,
 } from "@/shared";
 import { ProductList } from "@/widgets";
-import React from "react";
+
 interface FavoritesDrawerProps {
   children: React.ReactNode;
 }
