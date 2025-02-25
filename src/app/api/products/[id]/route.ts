@@ -18,6 +18,6 @@ export async function GET(
     return NextResponse.json(product);
   } catch (error) {
     console.error("Ошибка при получении продуктов по id в API роуте:", error);
-    return NextResponse.error();
+    return NextResponse.json({ error: "Не удалось загрузить продукты по id" });
   }
 }

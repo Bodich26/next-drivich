@@ -7,6 +7,6 @@ export async function GET() {
     return NextResponse.json(productsList);
   } catch (error) {
     console.log("Ошибка при получении списка продуктов в API роуте: ", error);
-    return NextResponse.error();
+    return NextResponse.json({ error: "Не удалось загрузить продукты" });
   }
 }
