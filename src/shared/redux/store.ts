@@ -1,5 +1,5 @@
+import { productsReducer, productsApi } from "@/entities";
 import { configureStore } from "@reduxjs/toolkit";
-import { productsApi, productsReducer } from "@/entities";
 
 export const store = configureStore({
   reducer: {
