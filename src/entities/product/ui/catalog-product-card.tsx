@@ -49,14 +49,14 @@ export const CatalogProductCard = ({ product }: ProductCardProps) => {
               <dd className="font-bold text-base">{`${product.acceleration} s`}</dd>
             </dl>
           )}
-          {product.engineType === "engine" &&
-            product.engineVolume !== undefined && (
+          {product.engineType === "ENGINE" &&
+            product.engineValue !== undefined && (
               <dl className="flex items-center gap-2">
                 <dt className="text-black-opacity75 text-base">Engine:</dt>
-                <dd className="font-bold text-base">{`${product.engineVolume} L`}</dd>
+                <dd className="font-bold text-base">{`${product.engineValue} L`}</dd>
               </dl>
             )}
-          {product.engineType === "electro" &&
+          {product.engineType === "ELECTRO" &&
             product.batteryCapacity !== undefined && (
               <dl className="flex items-center gap-2">
                 <dt className="text-black-opacity75 text-base">Battery:</dt>

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { ProductDate } from "@/entities";
+import { useGetProductsQuery } from "@/entities";
 import { ButtonCloseFavorites } from "@/features";
 import {
   DecorLine,
@@ -8,6 +8,7 @@ import {
   SheetContent,
   SheetHeader,
   SheetTitle,
+  SkeletonProduct,
 } from "@/shared";
 import { ProductList } from "@/widgets";
 
@@ -16,6 +17,7 @@ interface FavoritesDrawerProps {
 }
 
 export const FavoritesDrawer = ({ children }: FavoritesDrawerProps) => {
+  const { data: products = [], isLoading, isError } = useGetProductsQuery();
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -25,11 +27,16 @@ export const FavoritesDrawer = ({ children }: FavoritesDrawerProps) => {
           <SheetTitle className="font-bold text-2xl">Favorites</SheetTitle>
           <DecorLine />
         </SheetHeader>
-        <ProductList
-          className="px-2"
-          products={ProductDate}
-          variant="favorites"
-        />
+        {!isLoading ? (
+          <SkeletonProduct variant="favorites" />
+        ) : (
+          <ProductList
+            className="px-2"
+            products={products}
+            variant="favorites"
+          />
+        )}
+
         <div>
           <DecorLine />
           <ButtonCloseFavorites

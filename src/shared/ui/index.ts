@@ -10,3 +10,5 @@ export * from "./avatar";
 export * from "./dropdown-menu";
 export * from "./badge";
 export * from "./badge-sales";
+export * from "./skeleton";
+export * from "./skeleton-product";

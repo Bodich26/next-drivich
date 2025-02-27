@@ -7,8 +7,8 @@ export type ProductType = {
   speed?: number;
   color?: Array<string>;
   acceleration?: number;
-  engineType?: "engine" | "electro" | string;
-  engineVolume?: number;
+  engineType: "ENGINE" | "ELECTRO";
+  engineValue?: number;
   batteryCapacity?: number;
   price: number;
   discount?: number;

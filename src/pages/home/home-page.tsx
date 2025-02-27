@@ -1,7 +1,7 @@
 "use client";
 
 import { useGetProductsQuery } from "@/entities";
-import { Container } from "@/shared";
+import { Container, SkeletonProduct } from "@/shared";
 import { Footer, Header, ProductList } from "@/widgets";
 
 export const HomePage = () => {
@@ -12,8 +12,12 @@ export const HomePage = () => {
       <Header />
       <main className="flex flex-1 overflow-hidden">
         <Container className="flex flex-1 flex-col">
-          <section className="flex-1 overflow-y-auto">
-            <ProductList products={products} variant="catalog" />
+          <section className="flex flex-1 overflow-y-auto">
+            {isLoading ? (
+              <SkeletonProduct variant="catalog" />
+            ) : (
+              <ProductList products={products} variant="catalog" />
+            )}
           </section>
         </Container>
       </main>
