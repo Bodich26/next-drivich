@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { ProductType } from "../model";
+import { ProductType } from "../model/product-type";
 
-export const productsApi = createApi({
+const productsApi = createApi({
   reducerPath: "productsApi",
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_MAIN_URL_API }),
   tagTypes: ["Products"],
@@ -17,3 +17,4 @@ export const productsApi = createApi({
 });
 
 export const { useGetProductsQuery, useGetProductsByIdQuery } = productsApi;
+export default productsApi;

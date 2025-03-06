@@ -1,5 +1,5 @@
-import { calculateDiscountPrice } from "@/entities";
 import { cn } from "@/shared";
+import { calculateDiscountPrice } from "../model/calculate-discount-price";
 
 type PriceProductProps = {
   price: number;

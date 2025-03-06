@@ -1,3 +1,6 @@
+export {
+  default as productsApi,
+  useGetProductsByIdQuery,
+  useGetProductsQuery,
+} from "./api/product-api";
 export * from "./ui";
-export * from "./model";
-export * from "./api";

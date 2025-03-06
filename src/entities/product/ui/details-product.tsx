@@ -1,4 +1,4 @@
-import { ProductType } from "../model";
+import { ProductType } from "../model/product-type";
 
 type ProductDetailsProps = {
   product: ProductType;

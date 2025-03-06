@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BadgeSales, DecorLine } from "@/shared";
-import { ProductType, PriceProduct } from "@/entities";
 import { ButtonAddToCart, ButtonDeleteFavorites } from "@/features";
+import { ProductType } from "../model/product-type";
+import { PriceProduct } from "./price-product";
 
 type ProductCardProps = {
   product: ProductType;
