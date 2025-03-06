@@ -13,7 +13,7 @@ export const RegisterSchema = z.object({
   email: z.string().email({
     message: "A valid email address is required.",
   }),
-  name: z.string().min(3, {
+  firstName: z.string().min(3, {
     message: "Name must be at least 3 characters long.",
   }),
   password: z.string().min(6, {

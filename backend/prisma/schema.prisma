@@ -19,12 +19,12 @@ enum EngineType {
 }
 
 model User {
-    id        String @id @default(cuid())
+    id        String  @id @default(cuid())
     firstName String
-    lastName  String
-    email     String @unique
+    lastName  String?
+    email     String  @unique
     password  String
-    role      Role   @default(USER)
+    role      Role    @default(USER)
 
     accounts Account[]
     sessions Session[]

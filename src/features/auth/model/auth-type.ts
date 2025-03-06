@@ -7,13 +7,13 @@ type LoginResponse = {
   user: {
     id: string;
     email: string;
-    name: string;
+    firstName: string;
   };
   token: string;
 };
 
 type RegisterRequest = {
-  name: string;
+  firstName: string;
   email: string;
   password: string;
 };
@@ -22,7 +22,7 @@ type RegisterResponse = {
   user: {
     id: string;
     email: string;
-    name: string;
+    firstName: string;
   };
   token: string;
 };

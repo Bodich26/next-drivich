@@ -32,11 +32,13 @@ export const LoginForm = () => {
   const handleSubmitFrom = async (values: LoginFormData) => {
     try {
       const response = await login(values).unwrap();
+      loginAccount.reset();
       console.log("Успешный вход:", response);
       if (error) {
         console.log("Ошибка входа:", error);
       }
     } catch (err) {
+      loginAccount.reset();
       console.error("Ошибка входа:", err);
     }
   };
