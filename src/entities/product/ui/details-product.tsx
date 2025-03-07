@@ -19,7 +19,7 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
         }
           seconds. It reaches a top speed of ${
             product.speed
-          } km/h, with a reliable ${product.engineVolume}L
+          } km/h, with a reliable ${product.engineValue}L
           gasoline engine under the hood. This car combines performance, style,
           and innovation, delivering an incredible driving experience. Price — $${product.price.toLocaleString(
             "en-US"

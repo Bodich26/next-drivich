@@ -12,3 +12,4 @@ export * from "./badge";
 export * from "./badge-sales";
 export * from "./skeleton";
 export * from "./skeleton-product";
+export * from "./display-error";

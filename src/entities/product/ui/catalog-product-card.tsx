@@ -61,7 +61,7 @@ export const CatalogProductCard = ({ product }: ProductCardProps) => {
             product.batteryCapacity !== undefined && (
               <dl className="flex items-center gap-2">
                 <dt className="text-black-opacity75 text-base">Battery:</dt>
-                <dd className="font-bold text-base">{`${product.batteryCapacity} kWh`}</dd>
+                <dd className="font-bold text-base">{`${product.batteryCapacity} kw/h`}</dd>
               </dl>
             )}
         </div>

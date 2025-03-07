@@ -1,7 +1,7 @@
 "use client";
 
 import { useGetProductsQuery } from "@/entities";
-import { Container, SkeletonProduct } from "@/shared";
+import { Container, DisplayError, SkeletonProduct } from "@/shared";
 import { Footer, Header, ProductList } from "@/widgets";
 
 export const HomePage = () => {
@@ -18,6 +18,7 @@ export const HomePage = () => {
             ) : (
               <ProductList products={products} variant="catalog" />
             )}
+            {isError && <DisplayError error="Failed loading product" />}
           </section>
         </Container>
       </main>

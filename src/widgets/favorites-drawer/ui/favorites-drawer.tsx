@@ -27,7 +27,7 @@ export const FavoritesDrawer = ({ children }: FavoritesDrawerProps) => {
           <SheetTitle className="font-bold text-2xl">Favorites</SheetTitle>
           <DecorLine />
         </SheetHeader>
-        {!isLoading ? (
+        {isLoading ? (
           <SkeletonProduct variant="favorites" />
         ) : (
           <ProductList
@@ -36,7 +36,6 @@ export const FavoritesDrawer = ({ children }: FavoritesDrawerProps) => {
             variant="favorites"
           />
         )}
-
         <div>
           <DecorLine />
           <ButtonCloseFavorites
