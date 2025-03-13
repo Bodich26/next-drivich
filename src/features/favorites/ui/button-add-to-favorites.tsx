@@ -20,7 +20,7 @@ export const ButtonAddToFavorites = ({ variant }: IProps) => {
         height={32}
         className={cn(
           "block stroke-primary absolute opacity-0 left-[12px] top-[12px] invisible group-hover:opacity-100 group-hover:visible cursor-pointer transition-all duration-300 ease-in-out",
-          active ? "fill-primary" : "fill-transparent"
+          active ? "fill-primary visible opacity-100" : "fill-transparent"
         )}
       />
     );
