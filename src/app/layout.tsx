@@ -3,6 +3,7 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import { StoreProvider } from "@/shared";
 import { SessionWrapper } from "@/features/auth";
+import { auth } from "../../auth";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -20,10 +21,11 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
   return (
     <html lang="en">
       <body className={`${roboto.variable}`}>
-        <SessionWrapper>
+        <SessionWrapper session={session}>
           <StoreProvider>{children}</StoreProvider>
         </SessionWrapper>
       </body>
