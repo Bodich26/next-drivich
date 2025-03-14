@@ -5,7 +5,6 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { prisma } from "../../../../../backend/prisma/prisma-client";
 import { AuthError } from "next-auth";
-import { signIn } from "../../../../../auth";
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
@@ -38,11 +37,6 @@ export async function POST(req: NextRequest) {
   });
 
   try {
-    await signIn("credentials", {
-      email,
-      password,
-    });
-
     return NextResponse.json({
       success: true,
       message: "Successful registration",

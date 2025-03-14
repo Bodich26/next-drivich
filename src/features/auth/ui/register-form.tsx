@@ -1,8 +1,8 @@
 "use client";
-
+import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRegisterMutation } from "@/features";
+import { ErrorForm, SuccessForm, useRegisterMutation } from "@/features";
 import {
   Button,
   cn,
@@ -14,9 +14,12 @@ import {
   Input,
 } from "@/shared";
 import { RegisterFormData, RegisterSchema } from "../model/auth-schema";
+import { signIn } from "next-auth/react";
 
 export const RegisterForm = () => {
-  const [register, { isLoading, error }] = useRegisterMutation();
+  const [error, setError] = React.useState<string | undefined>("");
+  const [success, setSuccess] = React.useState<string | undefined>("");
+  const [register, { isLoading }] = useRegisterMutation();
 
   const RegisterAccount = useForm<RegisterFormData>({
     resolver: zodResolver(RegisterSchema),
@@ -32,16 +35,24 @@ export const RegisterForm = () => {
   const RegisterErrorPassword = RegisterAccount.formState.errors.password;
 
   const handleSubmitFrom = async (values: RegisterFormData) => {
+    setError("");
+    setSuccess("");
     try {
       const response = await register(values).unwrap();
-      RegisterAccount.reset();
-      console.log("успешная регистраци:", response);
-      if (error) {
-        console.log("Ошибка регистрации:", error);
+      if (response.success) {
+        await signIn("credentials", {
+          email: values.email,
+          password: values.password,
+          redirect: true,
+        });
+        setSuccess(response.message);
+        RegisterAccount.reset();
+      } else {
+        setError(response.error);
       }
-    } catch (err) {
-      RegisterAccount.reset();
-      console.error("Ошибка Регистрации:", err);
+    } catch (err: any) {
+      console.error("Ошибка при регистрации", err);
+      setError(err?.message || "Неизвестная ошибка!");
     }
   };
 
@@ -145,6 +156,8 @@ export const RegisterForm = () => {
               )}
             />
           </div>
+          <ErrorForm message={error} />
+          <SuccessForm message={success} />
           <Button
             className="font-medium text-base w-full px-2 mt-[36px]"
             type="submit"

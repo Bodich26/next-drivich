@@ -4,7 +4,6 @@ import { LoginSchema } from "@/features/auth/model/auth-schema";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { prisma } from "../../../../../backend/prisma/prisma-client";
-import { signIn } from "../../../../../auth";
 import { AuthError } from "next-auth";
 
 export async function POST(req: NextRequest) {
@@ -23,27 +22,17 @@ export async function POST(req: NextRequest) {
 
   if (!existingUser) {
     return NextResponse.json({
-      message: "This user does not exist!",
+      error: "This user does not exist!",
     });
   }
 
-  const isPasswordCorrect = await bcrypt.compare(
-    password,
-    existingUser.password
-  );
+  const isPasswordValid = await bcrypt.compare(password, existingUser.password);
 
-  if (!isPasswordCorrect) {
-    return NextResponse.json({
-      message: "Invalid password",
-    });
+  if (!isPasswordValid) {
+    return NextResponse.json({ error: "Password Wrong!" });
   }
 
   try {
-    await signIn("credentials", {
-      email,
-      password,
-    });
-
     return NextResponse.json({
       success: true,
       message: "Login is Successful",

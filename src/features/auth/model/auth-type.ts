@@ -4,6 +4,9 @@ type LoginRequest = {
 };
 
 type LoginResponse = {
+  message: string;
+  error: string;
+  success: boolean;
   user: {
     id: string;
     email: string;
@@ -19,6 +22,9 @@ type RegisterRequest = {
 };
 
 type RegisterResponse = {
+  message: string;
+  error: string;
+  success: boolean;
   user: {
     id: string;
     email: string;

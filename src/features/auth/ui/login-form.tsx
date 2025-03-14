@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useLoginMutation } from "@/features";
+import { ErrorForm, SuccessForm, useLoginMutation } from "@/features";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Button,
@@ -14,9 +14,12 @@ import {
   Input,
 } from "@/shared";
 import { LoginFormData, LoginSchema } from "../model/auth-schema";
+import { signIn } from "next-auth/react";
 
 export const LoginForm = () => {
-  const [login, { isLoading, error }] = useLoginMutation();
+  const [error, setError] = React.useState<string | undefined>("");
+  const [success, setSuccess] = React.useState<string | undefined>("");
+  const [login, { isLoading }] = useLoginMutation();
 
   const loginAccount = useForm<LoginFormData>({
     resolver: zodResolver(LoginSchema),
@@ -30,18 +33,24 @@ export const LoginForm = () => {
   const loginErrorPassword = loginAccount.formState.errors.password;
 
   const handleSubmitFrom = async (values: LoginFormData) => {
+    setError("");
+    setSuccess("");
     try {
       const response = await login(values).unwrap();
-      if (response) {
+      if (response.success) {
+        await signIn("credentials", {
+          email: values.email,
+          password: values.password,
+          redirect: true,
+        });
+        setSuccess(response.message);
         loginAccount.reset();
-        console.log("Успешный вход:", response);
+      } else {
+        setError(response.error);
       }
-      if (error) {
-        console.log("Ошибка входа:", error);
-      }
-    } catch (err) {
-      loginAccount.reset();
-      console.error("Ошибка входа:", err);
+    } catch (err: any) {
+      console.error("Ошибка при входе в аккаунт!", err);
+      setError(err?.message || "Неизвестная ошибка!");
     }
   };
 
@@ -115,6 +124,8 @@ export const LoginForm = () => {
               )}
             />
           </div>
+          <ErrorForm message={error} />
+          <SuccessForm message={success} />
           <Button
             disabled={isLoading}
             className="font-medium text-base w-full px-2 mt-[36px]"
