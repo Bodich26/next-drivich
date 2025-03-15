@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { ErrorForm, SuccessForm, useLoginMutation } from "@/features";
+import { ErrorForm, SuccessForm } from "@/features";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Button,
@@ -12,15 +12,17 @@ import {
   FormItem,
   FormLabel,
   Input,
+  LoaderLine,
 } from "@/shared";
 import { LoginFormData, LoginSchema } from "../model/auth-schema";
-import { signIn } from "next-auth/react";
+import { useLogin } from "../model/use-login";
 
-export const LoginForm = () => {
-  const [error, setError] = React.useState<string | undefined>("");
-  const [success, setSuccess] = React.useState<string | undefined>("");
-  const [login, { isLoading }] = useLoginMutation();
+type IProps = {
+  setActive: () => void;
+};
 
+export const LoginForm = ({ setActive }: IProps) => {
+  const { success, error, loading, handleLogin, setError } = useLogin();
   const loginAccount = useForm<LoginFormData>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -32,34 +34,12 @@ export const LoginForm = () => {
   const loginErrorEmail = loginAccount.formState.errors.email;
   const loginErrorPassword = loginAccount.formState.errors.password;
 
-  const handleSubmitFrom = async (values: LoginFormData) => {
-    setError("");
-    setSuccess("");
-    try {
-      const response = await login(values).unwrap();
-      if (response.success) {
-        await signIn("credentials", {
-          email: values.email,
-          password: values.password,
-          redirect: true,
-        });
-        setSuccess(response.message);
-        loginAccount.reset();
-      } else {
-        setError(response.error);
-      }
-    } catch (err: any) {
-      console.error("Ошибка при входе в аккаунт!", err);
-      setError(err?.message || "Неизвестная ошибка!");
-    }
-  };
-
   return (
     <div className="flex justify-center items-center">
       <Form {...loginAccount}>
         <form
           className="w-[308px]"
-          onSubmit={loginAccount.handleSubmit(handleSubmitFrom)}
+          onSubmit={loginAccount.handleSubmit(handleLogin)}
         >
           <h2 className="text-3xl font-bold mb-6">Login Form</h2>
           <div className="flex flex-col gap-[20px]">
@@ -82,7 +62,8 @@ export const LoginForm = () => {
                       placeholder="enter your email"
                       type="text"
                       {...field}
-                      disabled={isLoading}
+                      disabled={loading}
+                      onClick={() => setError("")}
                     />
                   </FormControl>
                   {loginErrorEmail && (
@@ -112,7 +93,7 @@ export const LoginForm = () => {
                       placeholder="+6 characters"
                       type="password"
                       {...field}
-                      disabled={isLoading}
+                      disabled={loading}
                     />
                   </FormControl>
                   {loginErrorPassword && (
@@ -124,14 +105,24 @@ export const LoginForm = () => {
               )}
             />
           </div>
+          {loading && <LoaderLine />}
           <ErrorForm message={error} />
           <SuccessForm message={success} />
           <Button
-            disabled={isLoading}
-            className="font-medium text-base w-full px-2 mt-[36px]"
+            disabled={loading}
+            className="font-medium text-base w-full px-2 mt-[22px]"
             type="submit"
           >
             Login
+          </Button>
+          <Button
+            type="button"
+            disabled={loading}
+            onClick={setActive}
+            variant="link"
+            className="h-[24px] mt-1"
+          >
+            Create account
           </Button>
         </form>
       </Form>

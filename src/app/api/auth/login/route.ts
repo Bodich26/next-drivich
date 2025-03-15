@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
   const validationFailed = LoginSchema.safeParse(body);
 
   if (!validationFailed.success) {
-    return NextResponse.json({ message: "Invalid fields" });
+    return NextResponse.json({ error: "Invalid fields" });
   }
 
   const { email, password } = validationFailed.data;

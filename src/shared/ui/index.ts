@@ -13,3 +13,4 @@ export * from "./badge-sales";
 export * from "./skeleton";
 export * from "./skeleton-product";
 export * from "./display-error";
+export { LoaderLine } from "./loader-line";

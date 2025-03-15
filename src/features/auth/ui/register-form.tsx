@@ -2,7 +2,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ErrorForm, SuccessForm, useRegisterMutation } from "@/features";
+import { ErrorForm, SuccessForm } from "@/features";
 import {
   Button,
   cn,
@@ -12,15 +12,17 @@ import {
   FormItem,
   FormLabel,
   Input,
+  LoaderLine,
 } from "@/shared";
 import { RegisterFormData, RegisterSchema } from "../model/auth-schema";
-import { signIn } from "next-auth/react";
+import { useRegister } from "../model/use-register";
 
-export const RegisterForm = () => {
-  const [error, setError] = React.useState<string | undefined>("");
-  const [success, setSuccess] = React.useState<string | undefined>("");
-  const [register, { isLoading }] = useRegisterMutation();
+type IProps = {
+  setActive: () => void;
+};
 
+export const RegisterForm = ({ setActive }: IProps) => {
+  const { success, setError, error, loading, handleRegister } = useRegister();
   const RegisterAccount = useForm<RegisterFormData>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
@@ -34,34 +36,12 @@ export const RegisterForm = () => {
   const RegisterErrorFirstName = RegisterAccount.formState.errors.firstName;
   const RegisterErrorPassword = RegisterAccount.formState.errors.password;
 
-  const handleSubmitFrom = async (values: RegisterFormData) => {
-    setError("");
-    setSuccess("");
-    try {
-      const response = await register(values).unwrap();
-      if (response.success) {
-        await signIn("credentials", {
-          email: values.email,
-          password: values.password,
-          redirect: true,
-        });
-        setSuccess(response.message);
-        RegisterAccount.reset();
-      } else {
-        setError(response.error);
-      }
-    } catch (err: any) {
-      console.error("Ошибка при регистрации", err);
-      setError(err?.message || "Неизвестная ошибка!");
-    }
-  };
-
   return (
     <div className="flex justify-center items-center">
       <Form {...RegisterAccount}>
         <form
           className="w-[308px]"
-          onSubmit={RegisterAccount.handleSubmit(handleSubmitFrom)}
+          onSubmit={RegisterAccount.handleSubmit(handleRegister)}
         >
           <h2 className="text-3xl font-bold mb-6">Register Form</h2>
           <div className="flex flex-col gap-[20px]">
@@ -84,7 +64,8 @@ export const RegisterForm = () => {
                       placeholder="enter your email"
                       type="text"
                       {...field}
-                      disabled={isLoading}
+                      onClick={() => setError("")}
+                      disabled={loading}
                     />
                   </FormControl>
                   {RegisterErrorEmail && (
@@ -114,7 +95,7 @@ export const RegisterForm = () => {
                       placeholder="enter your first name"
                       type="text"
                       {...field}
-                      disabled={isLoading}
+                      disabled={loading}
                     />
                   </FormControl>
                   {RegisterErrorFirstName && (
@@ -144,7 +125,7 @@ export const RegisterForm = () => {
                       placeholder="+6 characters"
                       type="password"
                       {...field}
-                      disabled={isLoading}
+                      disabled={loading}
                     />
                   </FormControl>
                   {RegisterErrorPassword && (
@@ -156,14 +137,24 @@ export const RegisterForm = () => {
               )}
             />
           </div>
+          {loading && <LoaderLine />}
           <ErrorForm message={error} />
           <SuccessForm message={success} />
           <Button
-            className="font-medium text-base w-full px-2 mt-[36px]"
+            className="font-medium text-base w-full px-2 mt-[22px]"
             type="submit"
-            disabled={isLoading}
+            disabled={loading}
           >
             Create
+          </Button>
+          <Button
+            type="button"
+            disabled={loading}
+            onClick={setActive}
+            variant="link"
+            className="h-[24px] mt-1"
+          >
+            Login account
           </Button>
         </form>
       </Form>

@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
   const validationFailed = RegisterSchema.safeParse(body);
 
   if (!validationFailed.success) {
-    return NextResponse.json({ message: "Invalid fields" });
+    return NextResponse.json({ error: "Invalid fields" });
   }
 
   const { email, firstName, password } = validationFailed.data;
@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
 
   if (existingUser) {
     return NextResponse.json({
-      message: "User already exists!",
+      error: "User already exists!",
     });
   }
 
