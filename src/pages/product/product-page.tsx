@@ -4,13 +4,13 @@ import React from "react";
 import { PriceProduct, ProductDetails } from "@/entities";
 import {
   ButtonAddToCart,
-  ButtonAddToFavorites,
+  ButtonToggleFavorites,
   ButtonBuyNow,
 } from "@/features";
 import { BadgeSales, cn, DecorLine } from "@/shared";
 
 const productItem = {
-  id: "1",
+  id: 1,
   brand: "Porsche",
   model: "911 Gt3 Rs",
   imageSrc: "https://imgur.com/BrwAy5s.png",
@@ -44,7 +44,10 @@ export const ProductPage = () => {
             <h1 className="font-bold text-3xl uppercase">
               {`${productItem.brand}: ` + `${productItem.model}`}
             </h1>
-            <ButtonAddToFavorites variant="static" />
+            <ButtonToggleFavorites
+              variant="static"
+              productId={productItem.id}
+            />
           </div>
           <DecorLine />
           <p className="text-[17px] text-black-opacity75 mb-10">

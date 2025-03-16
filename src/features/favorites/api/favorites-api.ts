@@ -1,5 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { FavoritesResponse } from "../model/favorites-type";
+import {
+  AddToFavoritesReq,
+  AddToFavoritesRes,
+  FavoritesRes,
+  RemoveFavoritesRes,
+  RemoveFavoritesReq,
+} from "../model/favorites-type";
 
 const favoritesApi = createApi({
   reducerPath: "favoritesApi",
@@ -8,12 +14,32 @@ const favoritesApi = createApi({
   }),
   tagTypes: ["Favorites"],
   endpoints: (builder) => ({
-    getFavorites: builder.query<FavoritesResponse, void>({
+    getFavorites: builder.query<FavoritesRes, void>({
       query: () => "/favorites",
       providesTags: ["Favorites"],
+    }),
+    addToFavorites: builder.mutation<AddToFavoritesRes, AddToFavoritesReq>({
+      query: ({ productId }) => ({
+        url: "/favorites",
+        method: "POST",
+        body: { productId },
+      }),
+      invalidatesTags: ["Favorites"],
+    }),
+    removeFavorites: builder.mutation<RemoveFavoritesRes, RemoveFavoritesReq>({
+      query: ({ productId }) => ({
+        url: "/favorites",
+        method: "DELETE",
+        body: { productId },
+      }),
+      invalidatesTags: ["Favorites"],
     }),
   }),
 });
 
-export const { useGetFavoritesQuery } = favoritesApi;
+export const {
+  useGetFavoritesQuery,
+  useAddToFavoritesMutation,
+  useRemoveFavoritesMutation,
+} = favoritesApi;
 export default favoritesApi;

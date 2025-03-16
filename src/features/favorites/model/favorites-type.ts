@@ -1,14 +1,34 @@
 import { Product } from "@prisma/client";
 
-type FavoritesRequest = {
-  userId: string;
+type AddToFavoritesReq = {
+  productId: number;
+};
+type RemoveFavoritesReq = {
   productId: number;
 };
 
-type FavoritesResponse = {
+type FavoritesRes = {
   error?: string;
   success?: boolean;
   items: Product[];
 };
 
-export type { FavoritesRequest, FavoritesResponse };
+type AddToFavoritesRes = {
+  error?: string;
+  success?: boolean;
+  message?: string;
+};
+
+type RemoveFavoritesRes = {
+  error?: string;
+  success?: boolean;
+  message?: string;
+};
+
+export type {
+  AddToFavoritesReq,
+  AddToFavoritesRes,
+  FavoritesRes,
+  RemoveFavoritesRes,
+  RemoveFavoritesReq,
+};

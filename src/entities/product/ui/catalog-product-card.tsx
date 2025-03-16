@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ButtonAddToCart, ButtonAddToFavorites } from "@/features";
+import { ButtonAddToCart, ButtonToggleFavorites } from "@/features";
 import { BadgeSales, DecorLine } from "@/shared";
 import { PriceProduct } from "./price-product";
 import { Product } from "@prisma/client";
@@ -14,7 +14,7 @@ export const CatalogProductCard = ({ product }: ProductCardProps) => {
     <div className="group max-w-[300px] hover-shadow-block relative">
       <div>
         <BadgeSales discount={product.discount} />
-        <ButtonAddToFavorites variant="hover" />
+        <ButtonToggleFavorites variant="hover" productId={product.id} />
         <Image
           src={product.imageSrc}
           width={300}
