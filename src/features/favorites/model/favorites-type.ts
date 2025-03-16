@@ -1,4 +1,4 @@
-import { Favorites } from "@prisma/client";
+import { Product } from "@prisma/client";
 
 type FavoritesRequest = {
   userId: string;
@@ -6,10 +6,9 @@ type FavoritesRequest = {
 };
 
 type FavoritesResponse = {
-  message: string;
   error?: string;
   success?: boolean;
-  items: Favorites[];
+  items: Product[];
 };
 
 export type { FavoritesRequest, FavoritesResponse };

@@ -10,7 +10,7 @@ export const ButtonOpenFavorites = () => {
       <Button className="font-medium text-base" size="sm">
         <Heart />
         {isLoading ? (
-          <ClipLoader color="hsb(210 40% 98%)" size="17" />
+          <ClipLoader color="hsb(210 40% 98%)" size="17px" />
         ) : error ? (
           ""
         ) : (

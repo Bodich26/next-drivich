@@ -9,29 +9,31 @@ export async function GET() {
   const userId = session?.user.id;
 
   if (!userId) {
-    return NextResponse.json({ message: "LogIn to the site", items: [] });
+    return NextResponse.json({ error: "LogIn to the site", items: [] });
   }
 
   const userFavorites = await prisma.favorites.findFirst({
     where: { userId },
     include: {
       products: {
-        orderBy: {
-          createdAt: "desc",
-        },
         include: {
           product: true,
+        },
+        orderBy: {
+          createdAt: "desc",
         },
       },
     },
   });
 
   if (!userFavorites || userFavorites.products.length === 0) {
-    return NextResponse.json({ message: "No product in favorites", items: [] });
+    return NextResponse.json({ error: "No product in favorites", items: [] });
   }
 
   try {
-    return NextResponse.json(userFavorites);
+    const favoriteProducts = userFavorites.products.map((p) => p.product);
+
+    return NextResponse.json({ items: favoriteProducts });
   } catch (error) {
     console.log(error);
     return NextResponse.json({ error: "Internal Server Error" });

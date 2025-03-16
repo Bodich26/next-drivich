@@ -3,19 +3,21 @@ import {
   FavoriteProductCard,
   CartProductCard,
 } from "@/entities";
-import { ProductType } from "@/entities/product/model/product-type";
 import { cn, DisplayError } from "@/shared";
+import { Product } from "@prisma/client";
 
 type ProductListProps = {
-  products: ProductType[];
+  products: Product[];
   variant: "catalog" | "cart" | "favorites";
   className?: string;
+  loadingError?: string | undefined;
 };
 
 export const ProductList = ({
   products,
   variant,
   className,
+  loadingError,
 }: ProductListProps) => {
   return (
     <div className={cn("flex-1 overflow-y-auto", className)}>
@@ -33,7 +35,7 @@ export const ProductList = ({
             }
           })
         ) : (
-          <DisplayError error="No products!" />
+          <DisplayError error={loadingError} />
         )}
       </div>
     </div>

@@ -1,5 +1,5 @@
 type Props = {
-  error: string;
+  error: string | undefined;
 };
 export const DisplayError = ({ error }: Props) => {
   return (

@@ -2,11 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { ButtonQuantity } from "@/features";
 import { BadgeSales } from "@/shared";
-import { ProductType } from "../model/product-type";
 import { PriceProduct } from "./price-product";
+import { Product } from "@prisma/client";
 
 type ProductCardProps = {
-  product: ProductType;
+  product: Product;
 };
 
 const featureProductsCart = ["car", "total", "price", "quantity", "color"];

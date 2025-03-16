@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { useGetProductsQuery } from "@/entities";
 import { ButtonCloseFavorites } from "@/features";
 import {
   DecorLine,
@@ -11,13 +10,14 @@ import {
   SkeletonProduct,
 } from "@/shared";
 import { ProductList } from "@/widgets";
+import { useGetFavorites } from "@/features/favorites/model/use-get-favorites";
 
 interface FavoritesDrawerProps {
   children: React.ReactNode;
 }
 
 export const FavoritesDrawer = ({ children }: FavoritesDrawerProps) => {
-  const { data: products = [], isLoading, isError } = useGetProductsQuery();
+  const { products, isLoading, error } = useGetFavorites();
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -34,6 +34,7 @@ export const FavoritesDrawer = ({ children }: FavoritesDrawerProps) => {
             className="px-2"
             products={products}
             variant="favorites"
+            loadingError={error}
           />
         )}
         <div>
