@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BadgeSales, DecorLine } from "@/shared";
-import { ButtonAddToCart, ButtonDeleteFavorites } from "@/features";
+import { ButtonAddToCart, ButtonRemoveFavorites } from "@/features";
 import { PriceProduct } from "./price-product";
 import { Product } from "@prisma/client";
 
@@ -12,7 +12,7 @@ type ProductCardProps = {
 export const FavoriteProductCard = ({ product }: ProductCardProps) => {
   return (
     <div className="max-w-[300px] relative">
-      <ButtonDeleteFavorites />
+      <ButtonRemoveFavorites productId={product.id} />
       <div>
         <BadgeSales className="top-2 right-2" discount={product.discount} />
         <Image
