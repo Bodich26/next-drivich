@@ -1,4 +1,4 @@
-import { Button, cn } from "@/shared";
+import { Button, cn, useToast } from "@/shared";
 import { ShoppingBag } from "lucide-react";
 
 type ButtonAddToCartProps = {
@@ -10,14 +10,22 @@ type ButtonAddToCartProps = {
 export const ButtonAddToCart = ({
   variant = "button",
   className,
-  onClick,
 }: ButtonAddToCartProps) => {
+  const { toast } = useToast();
+
+  const handleClick = () => {
+    toast({
+      title: "Add to cart",
+      description: "Successfully added to cart 🛒",
+    });
+  };
+
   const variants = {
     button: (
       <Button
         className={cn("font-medium text-base w-[128px] px-2", className)}
         size="sm"
-        onClick={onClick}
+        onClick={() => handleClick()}
       >
         Add to Cart
       </Button>
@@ -27,7 +35,7 @@ export const ButtonAddToCart = ({
         width={20}
         height={20}
         className={cn("stroke-primary cursor-pointer", className)}
-        onClick={onClick}
+        onClick={() => handleClick()}
       />
     ),
   };

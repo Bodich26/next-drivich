@@ -22,7 +22,7 @@ export const ButtonToggleFavorites = ({ variant, productId }: IProps) => {
     toast({
       title: success ? "Add to favorites" : "Not added to favorites",
       description: success
-        ? "Successfully added to favorites"
+        ? "Successfully added to favorites ❤️"
         : "Log in to your account",
     });
   };
