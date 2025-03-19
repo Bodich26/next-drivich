@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Heart } from "lucide-react";
-import { cn } from "@/shared";
+import { cn, useToast } from "@/shared";
 import { useFavoriteActions } from "../model/use-favorites-actions";
 import { useGetFavorites } from "../model/use-get-favorites";
 
@@ -13,10 +13,18 @@ interface IProps {
 export const ButtonToggleFavorites = ({ variant, productId }: IProps) => {
   const { favoriteIds } = useGetFavorites();
   const { toggleFavorite } = useFavoriteActions();
+  const { toast } = useToast();
   const isFavorite = favoriteIds.has(productId);
 
   const handleClick = async () => {
-    await toggleFavorite(productId, isFavorite);
+    const success = await toggleFavorite(productId, isFavorite);
+
+    toast({
+      title: success ? "Add to favorites" : "Not added to favorites",
+      description: success
+        ? "Successfully added to favorites"
+        : "Log in to your account",
+    });
   };
 
   if (variant === "hover") {

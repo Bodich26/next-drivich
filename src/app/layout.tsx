@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
-import { StoreProvider } from "@/shared";
+import { StoreProvider, Toaster } from "@/shared";
 import { SessionWrapper } from "@/features/auth";
 import { auth } from "../../auth";
 
@@ -28,6 +28,7 @@ export default async function RootLayout({
         <SessionWrapper session={session}>
           <StoreProvider>{children}</StoreProvider>
         </SessionWrapper>
+        <Toaster />
       </body>
     </html>
   );

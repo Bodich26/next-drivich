@@ -1,8 +1,6 @@
 import NextAuth, { DefaultSession } from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-
 import { prisma } from "./backend/prisma/prisma-client";
-
 import { Role } from "@prisma/client";
 import authConfig from "./auth.config";
 

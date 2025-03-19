@@ -45,6 +45,7 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   const session = await auth();
   const userId = session?.user.id;
+  console.log(userId);
 
   if (!userId) {
     return NextResponse.json({ error: "LogIn to the site" });
