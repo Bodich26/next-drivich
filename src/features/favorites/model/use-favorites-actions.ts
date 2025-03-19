@@ -10,15 +10,27 @@ export const useFavoriteActions = () => {
     useRemoveFavoritesMutation();
   const currentUser = useCurrentUser();
 
-  const toggleFavorite = async (productId: number, isFavorite: boolean) => {
-    if (!currentUser) return false;
-
-    if (isFavorite) {
-      await removeFromFavorites({ productId });
-    } else {
-      await addToFavorites({ productId });
+  const toggleFavorite = async (
+    productId: number,
+    isFavorite: boolean
+  ): Promise<{ success: boolean; error: unknown }> => {
+    if (!currentUser) {
+      return { success: false, error: "User is not Login" };
     }
-    return true;
+
+    try {
+      if (isFavorite) {
+        await removeFromFavorites({ productId }).unwrap();
+      } else {
+        await addToFavorites({ productId }).unwrap();
+      }
+      return { success: true, error: null };
+    } catch (error) {
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : "API request failed",
+      };
+    }
   };
 
   return { toggleFavorite, isLoading: adding || removing };
