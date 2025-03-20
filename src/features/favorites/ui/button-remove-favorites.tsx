@@ -1,6 +1,6 @@
 import { CircleX } from "lucide-react";
 import { useRemoveFavorites } from "../model/use-remove-favorites";
-import { useCurrentUser, useToast } from "@/shared";
+import { useToast } from "@/shared";
 
 type ButtonProps = {
   productId: number;
@@ -8,25 +8,22 @@ type ButtonProps = {
 
 export const ButtonRemoveFavorites = ({ productId }: ButtonProps) => {
   const { removeProductFromFavorites } = useRemoveFavorites();
-  const currentUser = useCurrentUser();
   const { toast } = useToast();
 
   const handleRemoveProduct = async () => {
-    if (currentUser) {
-      const { success, error } = await removeProductFromFavorites(productId);
-      if (success) {
-        toast({
-          title: "Removed from favorites",
-          description: "Successfully removed ❤️",
-        });
-      } else {
-        toast({
-          title: "Went wrong favorites",
-          description:
-            String(error) || "Oops, something went wrong. Try again later",
-          variant: "destructive",
-        });
-      }
+    const { success, error } = await removeProductFromFavorites(productId);
+    if (success) {
+      toast({
+        title: "Removed from favorites",
+        description: "Successfully removed ❤️",
+      });
+    } else {
+      toast({
+        title: "Went wrong favorites",
+        description:
+          String(error) || "Oops, something went wrong. Try again later",
+        variant: "destructive",
+      });
     }
   };
 

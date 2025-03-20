@@ -37,7 +37,7 @@ export const FavoriteProductCard = ({ product }: ProductCardProps) => {
             discount={product.discount}
             variant="favorites"
           />
-          <ButtonAddToCart variant="icon" />
+          <ButtonAddToCart variant="icon" productId={product.id} />
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import { cn } from "../lib";
 import { Skeleton } from "./skeleton";
 
 type Props = {
-  variant: "catalog" | "favorites" | "main";
+  variant: "catalog" | "favorites" | "cart";
   className?: string;
 };
 export const SkeletonProduct = ({ variant, className }: Props) => {
@@ -46,6 +46,39 @@ export const SkeletonProduct = ({ variant, className }: Props) => {
                       <Skeleton className="w-[100px] h-[22px] rounded-t-md bg-color-white" />
                     </div>
                     <Skeleton className="w-[22px] h-[22px] rounded-t-md bg-color-white" />
+                  </div>
+                </div>
+              </div>
+            );
+          }
+          if (variant === "cart") {
+            return (
+              <div className="w-full" key={index}>
+                <div className="w-full flex justify-between p-[12px] bg-color-minimal-light-white rounded-md">
+                  <div className="flex justify-between items-start flex-col gap-7">
+                    <Skeleton className="w-[35px] h-[19px] rounded-t-md bg-color-white" />
+                    <Skeleton className="w-[210px] h-[30px] rounded-t-md bg-color-white mb-[19px]" />
+                  </div>
+                  <div className="flex gap-6 basis-[65%] justify-end items-center">
+                    <div className="flex justify-between items-start flex-col gap-7">
+                      <Skeleton className="w-[65px] h-[19px] rounded-t-md bg-color-white" />
+                      <Skeleton className="w-[120px] h-[30px] rounded-t-md bg-color-white mb-[19px]" />
+                    </div>
+                    <div className="flex justify-between items-start flex-col gap-7">
+                      <Skeleton className="w-[65px] h-[19px] rounded-t-md bg-color-white" />
+                      <Skeleton className="w-[120px] h-[30px] rounded-t-md bg-color-white mb-[19px]" />
+                    </div>
+                    <div className="flex justify-between items-start flex-col gap-7">
+                      <Skeleton className="w-[100px] h-[19px] rounded-t-md bg-color-white" />
+                      <Skeleton className="w-[115px] h-[30px] rounded-t-md bg-color-white mb-[19px]" />
+                    </div>
+                    <div className="flex justify-between items-start flex-col gap-7">
+                      <Skeleton className="w-[60px] h-[19px] rounded-t-md bg-color-white" />
+                      <Skeleton className="w-[40px] h-[30px] rounded-t-md bg-color-white mb-[19px]" />
+                    </div>
+                  </div>
+                  <div>
+                    <Skeleton className="w-[175px] h-[82px] rounded-t-md bg-color-white" />
                   </div>
                 </div>
               </div>

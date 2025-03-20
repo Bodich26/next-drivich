@@ -35,7 +35,7 @@ export const ProductList = ({
             }
           })
         ) : (
-          <DisplayError error={loadingError} />
+          <DisplayError error={loadingError || "Loading Error"} />
         )}
       </div>
     </div>

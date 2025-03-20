@@ -11,7 +11,7 @@ interface IProps {
 }
 
 export const ButtonToggleFavorites = ({ variant, productId }: IProps) => {
-  const { favoriteIds } = useGetFavorites();
+  const { favoriteIds, isLoading } = useGetFavorites();
   const { toggleFavorite } = useFavoriteActions();
   const { toast } = useToast();
   const [isCooldown, setIsCooldown] = React.useState<boolean>(false);

@@ -66,7 +66,7 @@ export const CatalogProductCard = ({ product }: ProductCardProps) => {
             )}
         </div>
         <div className="flex items-end justify-between mt-4">
-          <ButtonAddToCart variant="button" />
+          <ButtonAddToCart variant="button" productId={product.id} />
           <PriceProduct
             price={product.price}
             discount={product.discount}
