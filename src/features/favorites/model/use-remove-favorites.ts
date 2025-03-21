@@ -8,13 +8,13 @@ export const useRemoveFavorites = () => {
 
   const removeProductFromFavorites = async (
     productId: number
-  ): Promise<{ success: boolean; error: unknown }> => {
+  ): Promise<{ success: boolean; error?: unknown }> => {
     if (!currentUser) {
       return { success: false, error: "User is not Login" };
     }
     try {
       await removeFromFavorites({ productId }).unwrap();
-      return { success: true, error: null };
+      return { success: true };
     } catch (error) {
       return {
         success: false,

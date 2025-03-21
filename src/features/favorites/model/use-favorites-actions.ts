@@ -13,7 +13,7 @@ export const useFavoriteActions = () => {
   const toggleFavorite = async (
     productId: number,
     isFavorite: boolean
-  ): Promise<{ success: boolean; error: unknown }> => {
+  ): Promise<{ success: boolean; error?: unknown }> => {
     if (!currentUser) {
       return { success: false, error: "User is not Login" };
     }
@@ -24,7 +24,7 @@ export const useFavoriteActions = () => {
       } else {
         await addToFavorites({ productId }).unwrap();
       }
-      return { success: true, error: null };
+      return { success: true };
     } catch (error) {
       return {
         success: false,

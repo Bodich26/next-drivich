@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Heart } from "lucide-react";
-import { cn, useCurrentUser, useToast } from "@/shared";
+import { cn, useCurrentUser, useHandleToast } from "@/shared";
 import { useFavoriteActions } from "../model/use-favorites-actions";
 import { useGetFavorites } from "../model/use-get-favorites";
 
@@ -11,12 +11,15 @@ interface IProps {
 }
 
 export const ButtonToggleFavorites = ({ variant, productId }: IProps) => {
-  const { favoriteIds, isLoading } = useGetFavorites();
-  const { toggleFavorite } = useFavoriteActions();
-  const { toast } = useToast();
   const [isCooldown, setIsCooldown] = React.useState<boolean>(false);
+  const { favoriteIds } = useGetFavorites();
+  const { toggleFavorite } = useFavoriteActions();
+  const { showToast } = useHandleToast();
+
   const isFavorite = favoriteIds.has(productId);
   const currentUser = useCurrentUser();
+
+  let timeoutId: NodeJS.Timeout;
 
   const handleClick = async () => {
     if (isCooldown) return;
@@ -25,36 +28,27 @@ export const ButtonToggleFavorites = ({ variant, productId }: IProps) => {
     const { success, error } = await toggleFavorite(productId, isFavorite);
 
     if (success) {
-      toast({
-        title: isFavorite ? "Removed from favorites" : "Added to favorites",
-        description: isFavorite
-          ? "Successfully removed ❤️"
-          : "Successfully added ❤️",
-      });
+      showToast(isFavorite ? "remove" : "add", "favorites");
     } else {
-      toast({
-        title: "Went wrong favorites",
-        description:
-          String(error) || "Oops, something went wrong. Try again later",
-        variant: "destructive",
-      });
+      showToast("error", "favorites", error);
     }
-
-    setTimeout(() => setIsCooldown(false), 5000);
+    timeoutId = setTimeout(() => setIsCooldown(false), 5000);
   };
 
-  const handleToastNoLogin = () => {
-    toast({
-      title: "Authorization required",
-      description: "Please log in to manage your favorites",
-      variant: "destructive",
-    });
-  };
+  const authToast = () => showToast("auth", "favorites");
+
+  React.useEffect(() => {
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, []);
 
   if (variant === "hover") {
     return (
       <Heart
-        onClick={currentUser ? handleClick : handleToastNoLogin}
+        onClick={!currentUser ? authToast : handleClick}
         width={32}
         height={32}
         className={cn(
@@ -68,7 +62,7 @@ export const ButtonToggleFavorites = ({ variant, productId }: IProps) => {
   if (variant === "static") {
     return (
       <Heart
-        onClick={currentUser ? handleClick : handleToastNoLogin}
+        onClick={!currentUser ? authToast : handleClick}
         width={32}
         height={32}
         className={cn(

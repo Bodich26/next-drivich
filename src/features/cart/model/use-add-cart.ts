@@ -7,7 +7,7 @@ export const useAddCart = () => {
 
   const addToProductCart = async (
     productId: number
-  ): Promise<{ success: boolean; error: unknown }> => {
+  ): Promise<{ success: boolean; error?: unknown }> => {
     if (!currentUser) {
       return { success: false, error: "User is not Login" };
     }
@@ -17,7 +17,7 @@ export const useAddCart = () => {
       if (!response.success) {
         return { success: false, error: response.error || "Unknown error" };
       }
-      return { success: true, error: response.error };
+      return { success: true };
     } catch (error) {
       return {
         success: false,

@@ -1,4 +1,4 @@
-import { Button, cn, useCurrentUser, useToast } from "@/shared";
+import { Button, cn, useCurrentUser, useHandleToast } from "@/shared";
 import { ShoppingBag } from "lucide-react";
 import { useAddCart } from "../model/use-add-cart";
 import { useGetCart } from "../model/use-get-cart";
@@ -15,36 +15,21 @@ export const ButtonAddToCart = ({
   productId,
 }: ButtonAddToCartProps) => {
   const { cartIds, isLoading } = useGetCart();
-  const { toast } = useToast();
+  const { showToast } = useHandleToast();
   const { addToProductCart } = useAddCart();
   const currentUser = useCurrentUser();
   const isAdding = isLoading ? true : cartIds.has(productId);
 
   const handleProductAddToCart = async () => {
     const { success, error } = await addToProductCart(productId);
-
     if (success) {
-      toast({
-        title: "Add to cart",
-        description: "Successfully added to cart 🛒",
-      });
+      showToast("add", "cart");
     } else {
-      toast({
-        title: "Went wrong cart",
-        description:
-          String(error) || "Oops, something went wrong. Try again later",
-        variant: "destructive",
-      });
+      showToast("error", "cart", error);
     }
   };
 
-  const handleToastNoLogin = () => {
-    toast({
-      title: "Authorization required",
-      description: "Please log in to manage your cart",
-      variant: "destructive",
-    });
-  };
+  const authToast = () => showToast("auth", "cart");
 
   const variants = {
     button: (
@@ -55,7 +40,7 @@ export const ButtonAddToCart = ({
           isAdding && "opacity-50 cursor-not-allowed"
         )}
         size="sm"
-        onClick={!currentUser ? handleToastNoLogin : handleProductAddToCart}
+        onClick={!currentUser ? authToast : handleProductAddToCart}
       >
         {isAdding ? "In Cart" : "Add to Cart"}
       </Button>
@@ -69,7 +54,7 @@ export const ButtonAddToCart = ({
           className,
           isAdding && "opacity-50 cursor-not-allowed"
         )}
-        onClick={!currentUser ? handleToastNoLogin : handleProductAddToCart}
+        onClick={!currentUser ? authToast : handleProductAddToCart}
       />
     ),
   };
