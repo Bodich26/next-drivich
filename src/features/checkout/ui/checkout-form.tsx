@@ -1,8 +1,8 @@
 "use client";
-import React from "react";
-import { useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { CheckoutFormData, CheckoutSchema } from "../model/checkout-schema";
 import {
   Button,
   cn,
@@ -16,115 +16,99 @@ import {
   LoaderLine,
   SuccessForm,
 } from "@/shared";
-import { LoginFormData, LoginSchema } from "../model/auth-schema";
-import { useLogin } from "../model/use-login";
+import { useCheckout } from "../model/use-checkout";
 
-type IProps = {
-  setActive: () => void;
-};
-
-export const LoginForm = ({ setActive }: IProps) => {
-  const { success, error, loading, handleLogin, setError } = useLogin();
-  const loginAccount = useForm<LoginFormData>({
-    resolver: zodResolver(LoginSchema),
+export const CheckoutForm = () => {
+  const { success, error, loading, handleCheckout, setError } = useCheckout();
+  const checkoutForm = useForm<CheckoutFormData>({
+    resolver: zodResolver(CheckoutSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      firstName: "",
+      lastName: "",
+      countryCode: "",
+      phoneNumber: "",
+      country: "",
+      city: "",
+      address: "",
+      payment: "Online",
     },
   });
 
-  const loginErrorEmail = loginAccount.formState.errors.email;
-  const loginErrorPassword = loginAccount.formState.errors.password;
+  const CheckoutErrorFirstName = checkoutForm.formState.errors.firstName;
+  const CheckoutErrorLastName = checkoutForm.formState.errors.lastName;
 
   return (
-    <div className="flex justify-center items-center">
-      <Form {...loginAccount}>
-        <form
-          className="w-[308px]"
-          onSubmit={loginAccount.handleSubmit(handleLogin)}
-        >
-          <h2 className="text-3xl font-bold mb-6">Login Form</h2>
+    <div>
+      <Form {...checkoutForm}>
+        <form onSubmit={checkoutForm.handleSubmit(handleCheckout)}>
+          <h1 className="text-3xl font-bold mb-6">Order Checkout</h1>
           <div className="flex flex-col gap-[20px]">
             <FormField
-              name="email"
-              control={loginAccount.control}
+              name="firstName"
+              control={checkoutForm.control}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel
                     className={cn(
                       "font-medium text-lg",
-                      loginErrorEmail && "text-primary"
+                      CheckoutErrorFirstName && "text-primary"
                     )}
                   >
-                    Email Address
+                    First name
                   </FormLabel>
                   <FormControl>
                     <Input
                       className="border border-black/15 h-[32px] bg-transparent "
-                      placeholder="enter your email"
+                      placeholder="your first name"
                       type="text"
                       {...field}
-                      disabled={loading}
-                      onClick={() => setError("")}
                     />
                   </FormControl>
-                  {loginErrorEmail && (
+                  {CheckoutErrorFirstName && (
                     <p className="text-primary text-sm">
-                      {loginErrorEmail.message}
+                      {CheckoutErrorFirstName.message}
                     </p>
                   )}
                 </FormItem>
               )}
             />
             <FormField
-              name="password"
-              control={loginAccount.control}
+              name="lastName"
+              control={checkoutForm.control}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel
                     className={cn(
                       "font-medium text-lg",
-                      loginErrorPassword && "text-primary"
+                      CheckoutErrorLastName && "text-primary"
                     )}
                   >
-                    Password
+                    Last name
                   </FormLabel>
                   <FormControl>
                     <Input
                       className="border border-black/15 h-[32px] bg-transparent "
-                      placeholder="+6 characters"
-                      type="password"
+                      placeholder="your last name"
+                      type="text"
                       {...field}
-                      disabled={loading}
                     />
                   </FormControl>
-                  {loginErrorPassword && (
+                  {CheckoutErrorLastName && (
                     <p className="text-primary text-sm">
-                      {loginErrorPassword.message}
+                      {CheckoutErrorLastName.message}
                     </p>
                   )}
                 </FormItem>
               )}
             />
           </div>
-          {loading && <LoaderLine />}
           <ErrorForm message={error} />
           <SuccessForm message={success} />
           <Button
-            disabled={loading}
             className="font-medium text-base w-full px-2 mt-[22px]"
             type="submit"
           >
-            Login
-          </Button>
-          <Button
-            type="button"
-            disabled={loading}
-            onClick={setActive}
-            variant="link"
-            className="h-[24px] mt-1"
-          >
-            Create account
+            Confirm the Order
           </Button>
         </form>
       </Form>

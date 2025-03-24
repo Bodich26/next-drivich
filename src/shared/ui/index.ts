@@ -16,3 +16,5 @@ export * from "./display-error";
 export { LoaderLine } from "./loader-line";
 export * from "./toast";
 export * from "./toaster";
+export { SuccessForm } from "./success-form";
+export { ErrorForm } from "./error-form";

@@ -8,5 +8,9 @@ export const useCartTotal = () => {
     return sum + discountedPrice * item.quantity;
   }, 0);
 
-  return { totalPrice };
+  const totalPrices = totalPrice
+    ? `$${totalPrice.toLocaleString("en-US")}`
+    : "$0";
+
+  return { totalPrices };
 };
