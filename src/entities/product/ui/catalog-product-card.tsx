@@ -1,12 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ButtonAddToCart, ButtonToggleFavorites } from "@/features";
-import { BadgeSales, DecorLine } from "@/shared";
+import { BadgeSales, DecorLine, ProductWithQuantity } from "@/shared";
 import { PriceProduct } from "./price-product";
-import { Product } from "@prisma/client";
 
 type ProductCardProps = {
-  product: Product;
+  product: ProductWithQuantity;
 };
 
 export const CatalogProductCard = ({ product }: ProductCardProps) => {

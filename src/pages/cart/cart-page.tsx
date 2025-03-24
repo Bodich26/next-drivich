@@ -13,6 +13,10 @@ export const CartPage = () => {
       <main className="flex flex-1 overflow-hidden">
         <Container className="flex flex-1 flex-col">
           <section className="flex flex-1 overflow-y-auto">
+            <div className=" rounded-md ">
+              <h3>Cart</h3>
+              <p>Totals: 1 198 000 $</p>
+            </div>
             {isLoading ? (
               <SkeletonProduct variant="cart" />
             ) : (

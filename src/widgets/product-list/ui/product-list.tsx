@@ -3,11 +3,10 @@ import {
   FavoriteProductCard,
   CartProductCard,
 } from "@/entities";
-import { cn, DisplayError } from "@/shared";
-import { Product } from "@prisma/client";
+import { cn, DisplayError, ProductWithQuantity } from "@/shared";
 
 type ProductListProps = {
-  products: Product[];
+  products: ProductWithQuantity[];
   variant: "catalog" | "cart" | "favorites";
   className?: string;
   loadingError?: string | undefined;

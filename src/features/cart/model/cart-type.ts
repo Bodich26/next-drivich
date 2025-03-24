@@ -1,4 +1,4 @@
-import { Product } from "@prisma/client";
+import { ProductWithQuantity } from "@/shared/types/product-type";
 
 type AddToCartReq = {
   productId: number;
@@ -14,12 +14,10 @@ type RemoveFromCartReq = {
   productId: number;
 };
 
-type CartItem = Product & { quantity: number };
-
 type CartRes = {
   error?: string;
   success?: boolean;
-  items: CartItem[];
+  items: ProductWithQuantity[];
 };
 
 type RemoveFromCartRes = {

@@ -1,19 +1,25 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ButtonQuantity } from "@/features";
-import { BadgeSales } from "@/shared";
+import { BadgeSales, ProductWithQuantity } from "@/shared";
 import { PriceProduct } from "./price-product";
-import { Product } from "@prisma/client";
+
 import React from "react";
-type CartItem = Product & { quantity: number };
+import { useDiscountTotalPrice } from "../model/use-discount-price";
+
 type ProductCardProps = {
-  product: CartItem;
+  product: ProductWithQuantity;
 };
 
 const featureProductsCart = ["car", "total", "price", "quantity", "color"];
 
 export const CartProductCard = ({ product }: ProductCardProps) => {
   const [quantity, setQuantity] = React.useState(product.quantity);
+  const { totalPrice } = useDiscountTotalPrice(
+    product.price,
+    product.discount,
+    product.quantity
+  );
   return (
     <div className="group w-full hover-shadow-block relative rounded-md p-[12px] bg-color-white flex gap-4">
       <table className="w-full border-collapse">
@@ -41,7 +47,7 @@ export const CartProductCard = ({ product }: ProductCardProps) => {
               </Link>
             </td>
             <td className="w-[160px] text-lg font-bold">
-              ${product.price?.toLocaleString("en-US")}
+              ${totalPrice?.toLocaleString("en-US")}
             </td>
             <td className="w-[160px] text-lg font-bold">
               <PriceProduct

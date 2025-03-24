@@ -1,4 +1,4 @@
-import { Product } from "@prisma/client";
+import { ProductWithQuantity } from "@/shared";
 
 type AddToFavoritesReq = {
   productId: number;
@@ -10,7 +10,7 @@ type RemoveFavoritesReq = {
 type FavoritesRes = {
   error?: string;
   success?: boolean;
-  items: Product[];
+  items: ProductWithQuantity[];
 };
 
 type AddToFavoritesRes = {
