@@ -20,7 +20,7 @@ export const ProductList = ({
 }: ProductListProps) => {
   return (
     <div className={cn("flex-1 overflow-y-auto", className)}>
-      <div className="flex flex-wrap gap-6">
+      <div className="flex flex-wrap gap-6 ">
         {products.length > 0 ? (
           products.map((product) => {
             if (variant === "catalog") {

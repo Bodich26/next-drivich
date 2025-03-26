@@ -2,10 +2,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ErrorForm, SuccessForm } from "@/features";
+
 import {
   Button,
   cn,
+  ErrorForm,
   Form,
   FormControl,
   FormField,
@@ -13,6 +14,7 @@ import {
   FormLabel,
   Input,
   LoaderLine,
+  SuccessForm,
 } from "@/shared";
 import { RegisterFormData, RegisterSchema } from "../model/auth-schema";
 import { useRegister } from "../model/use-register";

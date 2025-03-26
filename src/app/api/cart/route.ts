@@ -13,7 +13,7 @@ export async function GET() {
     return NextResponse.json({ error: "LogIn to the site", items: [] });
   }
 
-  const userCart = await prisma.cart.findFirst({
+  const userCart = await prisma.cart.findUnique({
     where: { userId },
     include: {
       products: {

@@ -12,6 +12,7 @@ export const useCheckout = () => {
     setError("");
     setSuccess("");
     setLoading(true);
+
     try {
       setSuccess("");
     } catch (err: any) {
