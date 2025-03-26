@@ -12,6 +12,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
   Input,
   LoaderLine,
   SuccessForm,
@@ -70,11 +71,7 @@ export const RegisterForm = ({ setActive }: IProps) => {
                       disabled={loading}
                     />
                   </FormControl>
-                  {RegisterErrorEmail && (
-                    <p className="text-primary text-sm">
-                      {RegisterErrorEmail.message}
-                    </p>
-                  )}
+                  <FormMessage className="text-primary text-sm" />
                 </FormItem>
               )}
             />
@@ -100,11 +97,7 @@ export const RegisterForm = ({ setActive }: IProps) => {
                       disabled={loading}
                     />
                   </FormControl>
-                  {RegisterErrorFirstName && (
-                    <p className="text-primary text-sm">
-                      {RegisterErrorFirstName.message}
-                    </p>
-                  )}
+                  <FormMessage className="text-primary text-sm" />
                 </FormItem>
               )}
             />
@@ -130,11 +123,7 @@ export const RegisterForm = ({ setActive }: IProps) => {
                       disabled={loading}
                     />
                   </FormControl>
-                  {RegisterErrorPassword && (
-                    <p className="text-primary text-sm">
-                      {RegisterErrorPassword.message}
-                    </p>
-                  )}
+                  <FormMessage className="text-primary text-sm" />
                 </FormItem>
               )}
             />

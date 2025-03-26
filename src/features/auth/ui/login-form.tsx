@@ -12,6 +12,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
   Input,
   LoaderLine,
   SuccessForm,
@@ -68,11 +69,7 @@ export const LoginForm = ({ setActive }: IProps) => {
                       onClick={() => setError("")}
                     />
                   </FormControl>
-                  {loginErrorEmail && (
-                    <p className="text-primary text-sm">
-                      {loginErrorEmail.message}
-                    </p>
-                  )}
+                  <FormMessage className="text-primary text-sm" />
                 </FormItem>
               )}
             />
@@ -98,11 +95,7 @@ export const LoginForm = ({ setActive }: IProps) => {
                       disabled={loading}
                     />
                   </FormControl>
-                  {loginErrorPassword && (
-                    <p className="text-primary text-sm">
-                      {loginErrorPassword.message}
-                    </p>
-                  )}
+                  <FormMessage className="text-primary text-sm" />
                 </FormItem>
               )}
             />

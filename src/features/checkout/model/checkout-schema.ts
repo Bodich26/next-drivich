@@ -19,7 +19,7 @@ export const CheckoutSchema = z.object({
   address: z.string().trim().min(3, {
     message: "Please enter a valid address.",
   }),
-  payment: z.enum(["Сash", "Online", ""]),
+  payment: z.enum(["Сash", "Online"]),
 });
 
 export type CheckoutFormData = z.infer<typeof CheckoutSchema>;

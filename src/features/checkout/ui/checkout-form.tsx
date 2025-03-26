@@ -16,6 +16,7 @@ import {
   FormLabel,
   FormMessage,
   Input,
+  LoaderLine,
   Select,
   SelectContent,
   SelectItem,
@@ -26,7 +27,7 @@ import {
 import { useCheckout } from "../model/use-checkout";
 
 export const CheckoutForm = () => {
-  const { success, error, loading, handleCheckout, setError } = useCheckout();
+  const { success, error, loading, handleCheckout } = useCheckout();
   const checkoutForm = useForm<CheckoutFormData>({
     resolver: zodResolver(CheckoutSchema),
     defaultValues: {
@@ -36,7 +37,7 @@ export const CheckoutForm = () => {
       country: "",
       city: "",
       address: "",
-      payment: "",
+      payment: "Online",
     },
   });
 
@@ -72,6 +73,7 @@ export const CheckoutForm = () => {
                   </FormLabel>
                   <FormControl>
                     <Input
+                      disabled={loading}
                       className="border border-black/15 h-[32px] bg-transparent "
                       placeholder="your first name"
                       type="text"
@@ -97,6 +99,7 @@ export const CheckoutForm = () => {
                   </FormLabel>
                   <FormControl>
                     <Input
+                      disabled={loading}
                       className="border border-black/15 h-[32px] bg-transparent "
                       placeholder="your last name"
                       type="text"
@@ -124,6 +127,7 @@ export const CheckoutForm = () => {
                   </FormLabel>
                   <FormControl>
                     <PhoneInput
+                      disabled={loading}
                       country={"us"}
                       value={field.value}
                       onChange={(value) => field.onChange(value)}
@@ -153,6 +157,7 @@ export const CheckoutForm = () => {
                   </FormLabel>
                   <FormControl>
                     <Input
+                      disabled={loading}
                       className="border border-black/15 h-[32px] bg-transparent "
                       placeholder="your country"
                       type="text"
@@ -178,6 +183,7 @@ export const CheckoutForm = () => {
                   </FormLabel>
                   <FormControl>
                     <Input
+                      disabled={loading}
                       className="border border-black/15 h-[32px] bg-transparent "
                       placeholder="your city"
                       type="text"
@@ -205,6 +211,7 @@ export const CheckoutForm = () => {
                   </FormLabel>
                   <FormControl>
                     <Input
+                      disabled={loading}
                       className="border border-black/15 h-[32px] bg-transparent w-full"
                       placeholder="7638 Town Cove Suite 924"
                       type="text"
@@ -233,7 +240,7 @@ export const CheckoutForm = () => {
                     Select payment method
                   </FormLabel>
                   <FormControl>
-                    <Select>
+                    <Select disabled={loading}>
                       <SelectTrigger className="w-full h-[32px] bg-color-white border border-black/15">
                         <SelectValue placeholder="payment method" />
                       </SelectTrigger>
@@ -250,9 +257,11 @@ export const CheckoutForm = () => {
           </div>
           <DecorLine />
         </div>
+        {loading && <LoaderLine />}
         <ErrorForm message={error} />
         <SuccessForm message={success} />
         <Button
+          disabled={loading}
           className="font-medium text-base w-full px-2 mt-[4px]"
           type="submit"
         >
