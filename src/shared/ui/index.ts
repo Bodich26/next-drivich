@@ -19,3 +19,5 @@ export * from "./toaster";
 export { SuccessForm } from "./success-form";
 export { ErrorForm } from "./error-form";
 export * from "./select";
+export * from "./slider";
+export * from "./checkbox";

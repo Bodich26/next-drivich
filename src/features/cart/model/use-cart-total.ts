@@ -5,7 +5,7 @@ export const useCartTotal = () => {
 
   const totalPrice = products.reduce((sum, item) => {
     const discountedPrice = item.price * (1 - (item.discount || 0) / 100);
-    return sum + discountedPrice * item.quantity;
+    return sum + discountedPrice * item.quantity!;
   }, 0);
 
   const totalPrices = totalPrice

@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/../auth";
 import { CheckoutSchema } from "@/features/checkout/model/checkout-schema";
 import { prisma } from "../../../../backend/prisma/prisma-client";
-import { redirect } from "next/dist/server/api-utils";
 
 export async function POST(req: NextRequest) {
   const session = await auth();

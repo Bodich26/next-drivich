@@ -179,11 +179,12 @@ body {
 
 /* Определение размеров и основных стилей скроллбара */
 ::-webkit-scrollbar {
-  width: 12px; /* Ширина скроллбара */
+  width: 12px;
+  display: none !important; /* Ширина скроллбара */
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(var(--background)); /* Цвет трека скроллбара */
+  background: transparent !important; /* Цвет трека скроллбара */
 }
 
 ::-webkit-scrollbar-thumb {
@@ -194,15 +195,13 @@ body {
 
 /* Дополнительные стили при наведении */
 ::-webkit-scrollbar-thumb:hover {
-  background-color: hsl(
-    var(--accent-foreground)
-  ); /* Более яркий акцент при наведении */
+  background-color: hsl(var(--primary)); /* Более яркий акцент при наведении */
 }
 
 /* Стили для Firefox */
 * {
   scrollbar-width: thin; /* Уменьшенная ширина скроллбара */
-  scrollbar-color: hsl(var(--input)) hsl(var(--background)); /* Цвет ползунка и трека */
+  scrollbar-color: hsl(var(--primary)) transparent; /* Ползунок цвета primary, трек прозрачный */
   box-sizing: border-box;
 }
 
