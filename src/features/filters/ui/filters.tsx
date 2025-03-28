@@ -1,9 +1,9 @@
+"use client";
+
 import { Input } from "@/shared";
 import { CircleX } from "lucide-react";
 import { RangeSlider } from "./range-slider";
 import { CheckboxGroup } from "./checkbox-group";
-
-const engineType = ["Engine", "Electro"];
 
 export const Filters = () => {
   return (
@@ -48,6 +48,46 @@ export const Filters = () => {
           {
             text: "Electro",
             value: "2",
+          },
+        ]}
+      />
+      <CheckboxGroup
+        title="Power"
+        limit={3}
+        defaultItems={[
+          {
+            text: "250-300 hp",
+            value: "1",
+          },
+          {
+            text: "300-400 hp",
+            value: "2",
+          },
+          {
+            text: "500-600 hp",
+            value: "3",
+          },
+        ]}
+        items={[
+          {
+            text: "250-300 hp",
+            value: "1",
+          },
+          {
+            text: "300-400 hp",
+            value: "2",
+          },
+          {
+            text: "500-600 hp",
+            value: "3",
+          },
+          {
+            text: "600-700 hp",
+            value: "4",
+          },
+          {
+            text: "700-800 hp",
+            value: "5",
           },
         ]}
       />

@@ -1,5 +1,4 @@
 "use client";
-
 import { useGetProducts } from "@/entities/product/model/use-get-products";
 import { Filters, SortedProducts } from "@/features";
 import { Container, DisplayError, SkeletonProduct } from "@/shared";
