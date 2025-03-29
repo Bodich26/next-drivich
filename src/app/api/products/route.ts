@@ -11,6 +11,7 @@ export async function GET(req: NextRequest) {
     const engine = searchParams.get("engine");
     const electro = searchParams.get("electro");
     const model = searchParams.get("model");
+    const powerRangesStr = searchParams.get("powerRanges");
 
     const filters: Prisma.ProductWhereInput = {};
 
@@ -35,6 +36,24 @@ export async function GET(req: NextRequest) {
       filters.model = {
         contains: model,
       };
+    }
+
+    if (powerRangesStr) {
+      try {
+        const powerRanges: { min: number; max: number }[] =
+          JSON.parse(powerRangesStr);
+
+        if (powerRanges.length > 0) {
+          filters.OR = powerRanges.map((range) => ({
+            power: {
+              gte: range.min,
+              lte: range.max,
+            },
+          }));
+        }
+      } catch (error) {
+        console.error("Ошибка при разборе диапазонов мощности:", error);
+      }
     }
 
     const productsList = await prisma.product.findMany({

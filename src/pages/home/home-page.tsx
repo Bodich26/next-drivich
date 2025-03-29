@@ -13,6 +13,7 @@ export const HomePage = () => {
     priceRange,
     setEngineTypes,
     setSearchModel,
+    setPowerRanges,
   } = useGetProducts();
 
   return (
@@ -27,6 +28,7 @@ export const HomePage = () => {
                 setPriceRange={setPriceRange}
                 setEngineTypes={setEngineTypes}
                 setSearchText={setSearchModel}
+                setPowerRanges={setPowerRanges}
               />
             </div>
             <div className="flex-1 min-h-0 overflow-y-auto">

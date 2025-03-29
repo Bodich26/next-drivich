@@ -11,6 +11,7 @@ type Props = {
   setPriceRange?: (values: [number, number]) => void;
   setEngineTypes: (types: string[]) => void;
   setSearchText?: (text: string) => void;
+  setPowerRanges: (values: { min: number; max: number }[]) => void;
 };
 
 export const Filters = ({
@@ -18,6 +19,7 @@ export const Filters = ({
   setPriceRange,
   setEngineTypes,
   setSearchText,
+  setPowerRanges,
 }: Props) => {
   const [searchBrand, setSearchBrand] = React.useState<string>("");
   const handleEngineTypeChange = (values: string[]) => {
@@ -34,6 +36,31 @@ export const Filters = ({
   const handleSearchModel = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchBrand(event.target.value);
     setSearchText?.(event.target.value);
+  };
+
+  const handlePowerChange = (values: string[]) => {
+    const powerRanges: { min: number; max: number }[] = [];
+
+    if (values.includes("1")) {
+      powerRanges.push({ min: 250, max: 300 });
+    }
+    if (values.includes("2")) {
+      powerRanges.push({ min: 300, max: 400 });
+    }
+    if (values.includes("3")) {
+      powerRanges.push({ min: 400, max: 500 });
+    }
+    if (values.includes("4")) {
+      powerRanges.push({ min: 500, max: 600 });
+    }
+    if (values.includes("5")) {
+      powerRanges.push({ min: 600, max: 700 });
+    }
+    if (values.includes("6")) {
+      powerRanges.push({ min: 700, max: 2000 });
+    }
+
+    setPowerRanges?.(powerRanges);
   };
 
   return (
@@ -93,6 +120,7 @@ export const Filters = ({
       <CheckboxGroup
         title="Power"
         limit={3}
+        onChange={handlePowerChange}
         defaultItems={[
           {
             text: "250-300 hp",
@@ -103,7 +131,7 @@ export const Filters = ({
             value: "2",
           },
           {
-            text: "500-600 hp",
+            text: "400-500 hp",
             value: "3",
           },
         ]}
@@ -117,16 +145,20 @@ export const Filters = ({
             value: "2",
           },
           {
-            text: "500-600 hp",
+            text: "400-500 hp",
             value: "3",
           },
           {
-            text: "600-700 hp",
+            text: "500-600 hp",
             value: "4",
           },
           {
-            text: "700-800 hp",
+            text: "600-700 hp",
             value: "5",
+          },
+          {
+            text: "> 700 hp",
+            value: "6",
           },
         ]}
       />
