@@ -1,10 +1,12 @@
 "use client";
 
-import React from "react";
 import { Input } from "@/shared";
 import { CircleX } from "lucide-react";
 import { RangeSlider } from "./range-slider";
 import { CheckboxGroup } from "./checkbox-group";
+import { usePowerChange } from "../model/use-power-change";
+import { useEngineChange } from "../model/use-engine-change";
+import { useSearchModel } from "../model/use-search-model";
 
 type Props = {
   priceRange?: [number, number];
@@ -21,53 +23,18 @@ export const Filters = ({
   setSearchText,
   setPowerRanges,
 }: Props) => {
-  const [searchBrand, setSearchBrand] = React.useState<string>("");
-  const handleEngineTypeChange = (values: string[]) => {
-    const engineTypes: string[] = [];
-    if (values.includes("1")) {
-      engineTypes.push("Engine");
-    }
-    if (values.includes("2")) {
-      engineTypes.push("Electro");
-    }
-    setEngineTypes(engineTypes);
-  };
-
-  const handleSearchModel = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchBrand(event.target.value);
-    setSearchText?.(event.target.value);
-  };
-
-  const handlePowerChange = (values: string[]) => {
-    const powerRanges: { min: number; max: number }[] = [];
-
-    if (values.includes("1")) {
-      powerRanges.push({ min: 250, max: 300 });
-    }
-    if (values.includes("2")) {
-      powerRanges.push({ min: 300, max: 400 });
-    }
-    if (values.includes("3")) {
-      powerRanges.push({ min: 400, max: 500 });
-    }
-    if (values.includes("4")) {
-      powerRanges.push({ min: 500, max: 600 });
-    }
-    if (values.includes("5")) {
-      powerRanges.push({ min: 600, max: 700 });
-    }
-    if (values.includes("6")) {
-      powerRanges.push({ min: 700, max: 2000 });
-    }
-
-    setPowerRanges?.(powerRanges);
-  };
+  const { handlePowerChange } = usePowerChange({ setPowerRanges });
+  const { handleEngineTypeChange } = useEngineChange({ setEngineTypes });
+  const { handleSearchModel, searchBrand } = useSearchModel({ setSearchText });
 
   return (
     <div className="w-[290px] bg-color-white rounded-md p-4 flex flex-col gap-6">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">Filter by</h1>
-        <div className="flex items-center gap-1 text-primary cursor-pointer">
+        <div
+          className="flex items-center gap-1 text-primary cursor-pointer"
+          onClick={() => window.location.reload()}
+        >
           <CircleX width={17} height={17} className="stroke-primary" />
           reset All
         </div>
@@ -124,41 +91,41 @@ export const Filters = ({
         defaultItems={[
           {
             text: "250-300 hp",
-            value: "1",
+            value: "3",
           },
           {
             text: "300-400 hp",
-            value: "2",
+            value: "4",
           },
           {
             text: "400-500 hp",
-            value: "3",
+            value: "5",
           },
         ]}
         items={[
           {
             text: "250-300 hp",
-            value: "1",
-          },
-          {
-            text: "300-400 hp",
-            value: "2",
-          },
-          {
-            text: "400-500 hp",
             value: "3",
           },
           {
-            text: "500-600 hp",
+            text: "300-400 hp",
             value: "4",
           },
           {
-            text: "600-700 hp",
+            text: "400-500 hp",
             value: "5",
           },
           {
-            text: "> 700 hp",
+            text: "500-600 hp",
             value: "6",
+          },
+          {
+            text: "600-700 hp",
+            value: "7",
+          },
+          {
+            text: "> 700 hp",
+            value: "8",
           },
         ]}
       />

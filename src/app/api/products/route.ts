@@ -12,6 +12,7 @@ export async function GET(req: NextRequest) {
     const electro = searchParams.get("electro");
     const model = searchParams.get("model");
     const powerRangesStr = searchParams.get("powerRanges");
+    const sort = searchParams.get("sort");
 
     const filters: Prisma.ProductWhereInput = {};
 
@@ -58,6 +59,9 @@ export async function GET(req: NextRequest) {
 
     const productsList = await prisma.product.findMany({
       where: filters,
+      orderBy: {
+        price: sort === "asc" ? "asc" : "desc",
+      },
     });
 
     return NextResponse.json(productsList);

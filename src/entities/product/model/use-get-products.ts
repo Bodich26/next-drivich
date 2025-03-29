@@ -10,6 +10,7 @@ type QueryParams = {
   electro?: string;
   model?: string;
   powerRanges?: string;
+  sort: string;
 };
 
 export const useGetProducts = () => {
@@ -21,6 +22,7 @@ export const useGetProducts = () => {
   const [powerRanges, setPowerRanges] = React.useState<
     { min: number; max: number }[]
   >([]);
+  const [sortOrder, setSortOrder] = React.useState("asc");
 
   const queryParams: QueryParams = {
     priceMin: priceRange[0].toString(),
@@ -29,6 +31,7 @@ export const useGetProducts = () => {
     electro: engineTypes.includes("Electro") ? "true" : undefined,
     model: searchModel,
     powerRanges: JSON.stringify(powerRanges),
+    sort: sortOrder,
   };
 
   const { data, isLoading, error } = useGetProductsQuery(queryParams);
@@ -43,5 +46,6 @@ export const useGetProducts = () => {
     setEngineTypes,
     setSearchModel,
     setPowerRanges,
+    setSortOrder,
   };
 };

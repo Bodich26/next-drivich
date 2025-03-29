@@ -14,6 +14,7 @@ export const HomePage = () => {
     setEngineTypes,
     setSearchModel,
     setPowerRanges,
+    setSortOrder,
   } = useGetProducts();
 
   return (
@@ -34,7 +35,7 @@ export const HomePage = () => {
             <div className="flex-1 min-h-0 overflow-y-auto">
               <div className="flex justify-between mb-6 mt-2">
                 <span>{products.length} result</span>
-                <SortedProducts />
+                <SortedProducts setSortOrder={setSortOrder} />
               </div>
               <div className=" min-h-0 overflow-y-auto">
                 {isLoading ? (
