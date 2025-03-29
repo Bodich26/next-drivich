@@ -6,10 +6,14 @@ const productsApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_URL }),
   tagTypes: ["Products"],
   endpoints: (builder) => ({
-    getProducts: builder.query<Product[], void>({
-      query: () => "/products",
+    getProducts: builder.query<Product[], Record<string, string>>({
+      query: (params) => {
+        const searchParams = new URLSearchParams(params);
+        return `/products?${searchParams.toString()}`;
+      },
       providesTags: ["Products"],
     }),
+
     getProductsById: builder.query<Product, string>({
       query: (id) => `/products/${id}`,
     }),

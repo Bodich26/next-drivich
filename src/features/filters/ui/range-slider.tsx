@@ -10,8 +10,8 @@ type SliderProps = {
   max: number;
   step: number;
   formatLabel?: (value: number) => string;
-  value?: number[] | readonly number[];
-  onValueChange?: (values: number[]) => void;
+  value?: [number, number];
+  onValueChange?: (values: [number, number]) => void;
 };
 
 const RangeSlider = React.forwardRef(
@@ -27,9 +27,10 @@ const RangeSlider = React.forwardRef(
     }, [min, max, value]);
 
     const handleValueChange = (newValues: number[]) => {
-      setLocalValues(newValues);
+      const [minValue, maxValue] = newValues;
+      setLocalValues([minValue, maxValue]);
       if (onValueChange) {
-        onValueChange(newValues);
+        onValueChange([minValue, maxValue]);
       }
     };
 

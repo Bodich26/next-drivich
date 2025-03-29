@@ -12,8 +12,8 @@ export const SortedProducts = () => {
     <div className="flex items-center gap-2">
       <span>Sort by</span>
       <Select>
-        <SelectTrigger className="w-[136px] h-9 bg-color-white border border-black/15">
-          <SelectValue placeholder="sort by price" />
+        <SelectTrigger className="w-[136px] h-[32px] bg-color-white border border-black/15">
+          <SelectValue placeholder="price" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>

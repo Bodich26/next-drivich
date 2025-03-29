@@ -1,11 +1,17 @@
 "use client";
 
+import React from "react";
 import { Input } from "@/shared";
 import { CircleX } from "lucide-react";
 import { RangeSlider } from "./range-slider";
 import { CheckboxGroup } from "./checkbox-group";
 
-export const Filters = () => {
+type Props = {
+  priceRange?: [number, number];
+  setPriceRange?: (values: [number, number]) => void;
+};
+
+export const Filters = ({ priceRange, setPriceRange }: Props) => {
   return (
     <div className="w-[290px] bg-color-white rounded-md p-4 flex flex-col gap-6">
       <div className="flex justify-between items-center">
@@ -25,7 +31,13 @@ export const Filters = () => {
       </div>
       <div className="flex flex-col gap-3">
         <span className=" font-medium text-lg">Price</span>
-        <RangeSlider min={0} max={900000} step={1000} value={[0, 900000]} />
+        <RangeSlider
+          min={0}
+          max={900000}
+          step={1000}
+          value={priceRange}
+          onValueChange={setPriceRange}
+        />
       </div>
       <CheckboxGroup
         title="Engine type"
