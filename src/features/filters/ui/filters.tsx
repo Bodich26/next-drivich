@@ -9,9 +9,33 @@ import { CheckboxGroup } from "./checkbox-group";
 type Props = {
   priceRange?: [number, number];
   setPriceRange?: (values: [number, number]) => void;
+  setEngineTypes: (types: string[]) => void;
+  setSearchText?: (text: string) => void;
 };
 
-export const Filters = ({ priceRange, setPriceRange }: Props) => {
+export const Filters = ({
+  priceRange,
+  setPriceRange,
+  setEngineTypes,
+  setSearchText,
+}: Props) => {
+  const [searchBrand, setSearchBrand] = React.useState<string>("");
+  const handleEngineTypeChange = (values: string[]) => {
+    const engineTypes: string[] = [];
+    if (values.includes("1")) {
+      engineTypes.push("Engine");
+    }
+    if (values.includes("2")) {
+      engineTypes.push("Electro");
+    }
+    setEngineTypes(engineTypes);
+  };
+
+  const handleSearchModel = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchBrand(event.target.value);
+    setSearchText?.(event.target.value);
+  };
+
   return (
     <div className="w-[290px] bg-color-white rounded-md p-4 flex flex-col gap-6">
       <div className="flex justify-between items-center">
@@ -27,6 +51,8 @@ export const Filters = ({ priceRange, setPriceRange }: Props) => {
           className="border border-black/15 h-[32px] bg-transparent"
           placeholder="enter the car name"
           type="search"
+          value={searchBrand}
+          onChange={handleSearchModel}
         />
       </div>
       <div className="flex flex-col gap-3">
@@ -42,6 +68,7 @@ export const Filters = ({ priceRange, setPriceRange }: Props) => {
       <CheckboxGroup
         title="Engine type"
         limit={2}
+        onChange={handleEngineTypeChange}
         defaultItems={[
           {
             text: "Engine",

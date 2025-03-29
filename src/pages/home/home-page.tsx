@@ -5,8 +5,15 @@ import { Container, DisplayError, SkeletonProduct } from "@/shared";
 import { Footer, Header, ProductList } from "@/widgets";
 
 export const HomePage = () => {
-  const { products, isLoading, error, setPriceRange, priceRange } =
-    useGetProducts();
+  const {
+    products,
+    isLoading,
+    error,
+    setPriceRange,
+    priceRange,
+    setEngineTypes,
+    setSearchModel,
+  } = useGetProducts();
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
@@ -15,7 +22,12 @@ export const HomePage = () => {
         <Container className="flex-1 flex">
           <section className="flex justify-between gap-8 flex-1 overflow-hidden">
             <div className="min-h-0 overflow-y-auto">
-              <Filters priceRange={priceRange} setPriceRange={setPriceRange} />
+              <Filters
+                priceRange={priceRange}
+                setPriceRange={setPriceRange}
+                setEngineTypes={setEngineTypes}
+                setSearchText={setSearchModel}
+              />
             </div>
             <div className="flex-1 min-h-0 overflow-y-auto">
               <div className="flex justify-between mb-6 mt-2">
