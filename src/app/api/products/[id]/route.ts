@@ -5,7 +5,9 @@ export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const productId = parseInt(params.id);
+  const { id } = await params;
+  const productId = parseInt(id);
+
   try {
     const product = await prisma.product.findUnique({
       where: { id: productId },

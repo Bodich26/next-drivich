@@ -22,7 +22,7 @@ export const useGetProducts = () => {
   const [powerRanges, setPowerRanges] = React.useState<
     { min: number; max: number }[]
   >([]);
-  const [sortOrder, setSortOrder] = React.useState("asc");
+  const [sortOrder, setSortOrder] = React.useState("cheap");
 
   const queryParams: QueryParams = {
     priceMin: priceRange[0].toString(),

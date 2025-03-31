@@ -21,3 +21,4 @@ export { ErrorForm } from "./error-form";
 export * from "./select";
 export * from "./slider";
 export * from "./checkbox";
+export * from "./carousel";
