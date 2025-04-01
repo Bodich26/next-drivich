@@ -27,7 +27,7 @@ export const UserDropdown = () => {
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <LucideUser width={18} height={18} />
-          <Link href={`/user/${1}`}>Profile</Link>
+          <Link href={`/profile`}>Profile</Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <LogoutButton />
