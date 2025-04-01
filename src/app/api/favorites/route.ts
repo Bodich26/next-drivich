@@ -27,8 +27,8 @@ export async function GET() {
     },
   });
 
-  if (!userFavorites || userFavorites.products.length === 0) {
-    return NextResponse.json({ error: "No product in favorites", items: [] });
+  if (!userFavorites) {
+    return NextResponse.json({ items: [] });
   }
 
   try {

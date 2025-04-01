@@ -9,7 +9,7 @@ import {
   SheetTitle,
   SkeletonProduct,
 } from "@/shared";
-import { ProductList } from "@/widgets";
+import { DisplayLoadingErrors, ProductList } from "@/widgets";
 import { useGetFavorites } from "@/features/favorites/model/use-get-favorites";
 
 interface FavoritesDrawerProps {
@@ -22,19 +22,20 @@ export const FavoritesDrawer = ({ children }: FavoritesDrawerProps) => {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       {children}
-      <SheetContent className="w-[294px] h-full flex flex-col p-4">
+      <SheetContent className="w-[294px] h-full flex flex-col p-4 justify-between">
         <SheetHeader>
           <SheetTitle className="font-bold text-2xl">Favorites</SheetTitle>
           <DecorLine />
         </SheetHeader>
         {isLoading ? (
           <SkeletonProduct variant="favorites" />
+        ) : error ? (
+          <DisplayLoadingErrors entities="favorites" error={error} />
         ) : (
           <ProductList
             className="px-2"
             products={products}
             variant="favorites"
-            loadingError={error}
           />
         )}
         <div>

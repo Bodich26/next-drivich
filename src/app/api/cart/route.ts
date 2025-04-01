@@ -27,8 +27,8 @@ export async function GET() {
     },
   });
 
-  if (!userCart || userCart.products.length === 0) {
-    return NextResponse.json({ error: "No product in cart", items: [] });
+  if (!userCart) {
+    return NextResponse.json({ items: [] });
   }
 
   try {

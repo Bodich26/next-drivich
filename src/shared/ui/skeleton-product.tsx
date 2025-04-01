@@ -51,6 +51,8 @@ export const SkeletonProduct = ({ variant, className }: Props) => {
               </div>
             );
           }
+        })}
+        {Array.from({ length: 5 }).map((_, index) => {
           if (variant === "cart") {
             return (
               <div className="w-full" key={index}>

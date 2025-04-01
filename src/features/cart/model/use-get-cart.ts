@@ -3,7 +3,7 @@ import { useCurrentUser } from "@/shared";
 
 export const useGetCart = () => {
   const currentUser = useCurrentUser();
-  const { data, isLoading } = useGetCartQuery(undefined, {
+  const { data, isLoading, error } = useGetCartQuery(undefined, {
     skip: !currentUser,
   });
 
@@ -12,7 +12,7 @@ export const useGetCart = () => {
   return {
     products: data?.items || [],
     isLoading,
-    error: data?.error,
+    error: error && "Server Error",
     cartIds,
   };
 };

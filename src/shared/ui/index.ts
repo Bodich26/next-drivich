@@ -22,3 +22,4 @@ export * from "./select";
 export * from "./slider";
 export * from "./checkbox";
 export * from "./carousel";
+export { SkeletonProductPage } from "./skeleton-product-page";

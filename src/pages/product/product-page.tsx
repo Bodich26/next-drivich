@@ -16,10 +16,12 @@ import {
   CarouselPrevious,
   cn,
   DecorLine,
+  SkeletonProductPage,
 } from "@/shared";
 import { usePathname } from "next/navigation";
 import { Star } from "lucide-react";
 import Image from "next/image";
+import { DisplayLoadingErrors } from "@/widgets";
 
 export const ProductPage = () => {
   const pathname = usePathname();
@@ -27,14 +29,14 @@ export const ProductPage = () => {
 
   const { product, isLoading, error } = useGetProductId({ productId });
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error {error}</p>;
+  if (isLoading) return <SkeletonProductPage />;
+  if (error) return <DisplayLoadingErrors entities="page" error={error} />;
 
   return (
     <>
       {product && (
         <div className="flex justify-between gap-8">
-          <div className="flex flex-col justify-between p-4 rounded-md  basis-[70%] relative product-gradient">
+          <div className="flex flex-col justify-between p-4 rounded-md basis-[70%] relative product-gradient">
             <div>
               <h1 className="font-bold text-3xl uppercase">
                 {`${product.brand} - ${product.model}`}
@@ -107,7 +109,7 @@ export const ProductPage = () => {
           </div>
           <div className="rounded-md p-4 bg-color-white basis-[30%] ">
             <div className="flex flex-col justify-between h-full">
-              <dl className="flex justify-between items-start mb-[22px]">
+              <dl className="flex justify-between items-start">
                 <div>
                   <dt className="font-bold text-xl mb-3">Rating & Reviews</dt>
                   <dd className="flex gap-1">
@@ -129,7 +131,7 @@ export const ProductPage = () => {
                 />
               </dl>
               <DecorLine />
-              <dl className="flex flex-col justify-between items-start mb-[22px]">
+              <dl className="flex flex-col justify-between items-start">
                 <dt className="font-bold text-xl mb-3">Colors</dt>
                 <dd className="flex">
                   {product.color.map((color: string, index: number) => (
@@ -142,7 +144,7 @@ export const ProductPage = () => {
                 </dd>
               </dl>
               <DecorLine />
-              <dl className="flex flex-col justify-between items-start mb-[22px]">
+              <dl className="flex flex-col justify-between items-start">
                 <dt className="font-bold text-xl mb-3">Description</dt>
                 <dd className="text-base text-black-opacity75">
                   The Porsche 911 GT3 RS is a high-performance sports car built
@@ -154,7 +156,7 @@ export const ProductPage = () => {
                 </dd>
               </dl>
               <DecorLine />
-              <dl className="flex flex-col justify-between items-start mb-[22px]">
+              <dl className="flex flex-col justify-between items-start">
                 <dt className="font-bold text-xl mb-3">Settings</dt>
                 <dd className="text-base text-black-opacity75">
                   Sed ut perspiciatis unde omnis iste natus error sit voluptatem
@@ -162,7 +164,7 @@ export const ProductPage = () => {
                 </dd>
               </dl>
               <DecorLine />
-              <div className="flex flex-row items-start justify-between mt-4">
+              <div className="flex flex-row items-start justify-between ">
                 <ButtonBuyNow />
                 <ButtonAddToCart variant="button" productId={product.id} />
               </div>

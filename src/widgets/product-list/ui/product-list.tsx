@@ -3,7 +3,7 @@ import {
   FavoriteProductCard,
   CartProductCard,
 } from "@/entities";
-import { cn, DisplayError, ProductWithQuantity } from "@/shared";
+import { cn, ProductWithQuantity } from "@/shared";
 
 type ProductListProps = {
   products: ProductWithQuantity[];
@@ -16,7 +16,6 @@ export const ProductList = ({
   products,
   variant,
   className,
-  loadingError,
 }: ProductListProps) => {
   return (
     <div className={cn("flex-1 overflow-y-auto", className)}>
@@ -34,7 +33,10 @@ export const ProductList = ({
             }
           })
         ) : (
-          <DisplayError error={loadingError || "No Products"} />
+          <div className="w-full bg-color-white rounded-md text-center p-4 hover-shadow-block">
+            <h1 className="text-xl font-bold mb-1">No products</h1>
+            <p>Oops, looks like you&apos;re out of groceries!</p>
+          </div>
         )}
       </div>
     </div>

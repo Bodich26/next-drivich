@@ -4,7 +4,7 @@ import { useGetFavoritesQuery } from "../api/favorites-api";
 export const useGetFavorites = () => {
   const currentUser = useCurrentUser();
 
-  const { data, isLoading } = useGetFavoritesQuery(undefined, {
+  const { data, isLoading, error } = useGetFavoritesQuery(undefined, {
     skip: !currentUser,
   });
 
@@ -13,7 +13,7 @@ export const useGetFavorites = () => {
   return {
     products: data?.items || [],
     isLoading,
-    error: data?.error,
+    error: error && "Server Error",
     favoriteIds,
   };
 };

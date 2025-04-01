@@ -1,8 +1,8 @@
 "use client";
 import { useGetProducts } from "@/entities/product/model/use-get-products";
 import { Filters, SortedProducts } from "@/features";
-import { Container, DisplayError, SkeletonProduct } from "@/shared";
-import { Footer, Header, ProductList } from "@/widgets";
+import { Container, SkeletonProduct } from "@/shared";
+import { DisplayLoadingErrors, Footer, Header, ProductList } from "@/widgets";
 
 export const HomePage = () => {
   const {
@@ -43,7 +43,9 @@ export const HomePage = () => {
                 ) : (
                   <ProductList products={products} variant="catalog" />
                 )}
-                {error && <DisplayError error="Failed loading product" />}
+                {error && (
+                  <DisplayLoadingErrors entities="products" error={error} />
+                )}
               </div>
             </div>
           </section>
