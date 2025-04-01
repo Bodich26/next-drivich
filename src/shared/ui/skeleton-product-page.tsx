@@ -28,8 +28,8 @@ export const SkeletonProductPage = () => {
               <Skeleton className="w-[342px] h-[140px] rounded-md" />
             </div>
             <div className="flex justify-between flex-row w-full">
-              <Skeleton className="w-[150px] h-[37px] rounded-md" />
-              <Skeleton className="w-[150px] h-[37px] rounded-md" />
+              <Skeleton className="w-[130px] h-[37px] rounded-md" />
+              <Skeleton className="w-[130px] h-[37px] rounded-md" />
             </div>
           </div>
         </div>

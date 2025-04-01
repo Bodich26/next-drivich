@@ -165,7 +165,7 @@ export const ProductPage = () => {
               </dl>
               <DecorLine />
               <div className="flex flex-row items-start justify-between ">
-                <ButtonBuyNow />
+                <ButtonBuyNow productId={product.id} />
                 <ButtonAddToCart variant="button" productId={product.id} />
               </div>
             </div>
