@@ -2,16 +2,13 @@
 
 import { OrderList } from "@/features";
 import { useGetOrders } from "@/features/orders/model/use-get-orders";
-import { Container, useCurrentUser } from "@/shared";
-import { Footer, Header } from "@/widgets";
+import { Container, SkeletonOrders, useCurrentUser } from "@/shared";
+import { DisplayLoadingErrors, Footer, Header } from "@/widgets";
 import Image from "next/image";
 
 export const ProfilePage = () => {
   const currentUser = useCurrentUser();
   const { orders, isLoading, error } = useGetOrders();
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
@@ -40,7 +37,16 @@ export const ProfilePage = () => {
               </div>
             </div>
             <div className="flex flex-1 flex-col overflow-y-auto gap-4">
-              <OrderList orders={orders} />
+              <div className="rounded-md p-[12px] bg-color-white flex justify-between text-2xl font-bold">
+                <h3>My Orders</h3>
+              </div>
+              {isLoading ? (
+                <SkeletonOrders />
+              ) : error ? (
+                <DisplayLoadingErrors entities="orders" error={error} />
+              ) : (
+                <OrderList orders={orders} />
+              )}
             </div>
           </section>
         </Container>

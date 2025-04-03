@@ -1,4 +1,4 @@
-import { cn } from "@/shared";
+import { cn, PriceFormat } from "@/shared";
 import { calculateDiscountPrice } from "../model/calculate-discount-price";
 
 type PriceProductProps = {
@@ -17,7 +17,7 @@ export const PriceProduct = ({
 
   const priceElement = (
     <span className="font-bold">
-      ${discountedPrice.toLocaleString("en-US")}
+      <PriceFormat price={discountedPrice} />
     </span>
   );
 
@@ -28,7 +28,7 @@ export const PriceProduct = ({
         variant === "main" ? "text-xl" : "text-[16px]"
       )}
     >
-      ${price.toLocaleString("en-US")}
+      <PriceFormat price={price} />
     </span>
   );
 

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { OrderListProductsProps } from "../model/orders-type";
+import { PriceFormat } from "@/shared";
 
 export const OrderListProducts = ({
   orderProducts,
@@ -47,7 +48,7 @@ export const OrderListProducts = ({
                       </Link>
                     </td>
                     <td className="text-lg font-bold w-[120px]">
-                      ${item.price?.toLocaleString("en-US")}
+                      <PriceFormat price={item.price} />
                     </td>
                     <td className="text-lg font-bold  w-[40px]">
                       {item.quantity}

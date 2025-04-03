@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
   cn,
+  PriceFormat,
 } from "@/shared";
 import { OrderListProducts } from "./order-list-products";
 import { OrderItemProps } from "../model/orders-type";
@@ -42,7 +43,10 @@ export const OrderItems = ({ order }: OrderItemProps) => {
             <dl className="flex flex-col gap-2">
               <OrderInfoItem label="First name" value={order.firstName} />
               <OrderInfoItem label="Last name" value={order.lastName} />
-              <OrderInfoItem label="Phone number" value={order.phoneNumber} />
+              <OrderInfoItem
+                label="Phone number"
+                value={`+${order.phoneNumber}`}
+              />
               <OrderInfoItem label="Country" value={order.country} />
               <OrderInfoItem label="City" value={order.city} />
               <OrderInfoItem label="Address" value={order.address} />
@@ -52,7 +56,9 @@ export const OrderItems = ({ order }: OrderItemProps) => {
           <div className="basis-[60%]">
             <div className="overflow-y-auto">
               <div className="flex justify-between mb-4 font-medium text-base">
-                <span>Total: ${order.totalPrice.toLocaleString("en-US")}</span>
+                <span>
+                  Total: <PriceFormat price={order.totalPrice} />
+                </span>
                 <span>
                   CreateAt: {order.createdAt.toString().split("T")[0]}
                 </span>

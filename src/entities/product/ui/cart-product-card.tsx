@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ButtonQuantity } from "@/features";
-import { BadgeSales, ProductWithQuantity } from "@/shared";
+import { BadgeSales, PriceFormat, ProductWithQuantity } from "@/shared";
 import { PriceProduct } from "./price-product";
 
 import React from "react";
@@ -47,7 +47,7 @@ export const CartProductCard = ({ product }: ProductCardProps) => {
               </Link>
             </td>
             <td className="w-[160px] text-lg font-bold">
-              ${totalPrice?.toLocaleString("en-US")}
+              <PriceFormat price={totalPrice} />
             </td>
             <td className="w-[160px] text-lg font-bold">
               <PriceProduct
