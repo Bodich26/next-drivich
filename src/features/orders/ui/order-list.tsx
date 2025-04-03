@@ -16,7 +16,7 @@ export const OrderList = ({ orders }: OrderProps) => {
           ) : (
             <div className="w-full bg-color-white rounded-md text-center p-4 hover-shadow-block">
               <h1 className="text-xl font-bold mb-1">No orders</h1>
-              <p>Oops, looks looks like you don&apos;t have any orders</p>
+              <p>Oops, looks like you don&apos;t have any orders</p>
             </div>
           )}
         </div>

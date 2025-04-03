@@ -14,7 +14,7 @@ type ProductCardProps = {
 const featureProductsCart = ["car", "total", "price", "quantity", "color"];
 
 export const CartProductCard = ({ product }: ProductCardProps) => {
-  const [quantity, setQuantity] = React.useState(product.quantity);
+  const [, setQuantity] = React.useState(product.quantity);
   const { totalPrice } = useDiscountTotalPrice(
     product.price,
     product.discount,
@@ -66,7 +66,7 @@ export const CartProductCard = ({ product }: ProductCardProps) => {
             <td className="w-[40px]">
               <span
                 className="w-[19px] h-[19px] block rounded-full"
-                style={{ backgroundColor: product.color }}
+                style={{ backgroundColor: product.color[0] }}
               ></span>
             </td>
           </tr>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ButtonAddToCart, ButtonToggleFavorites } from "@/features";
 import { BadgeSales, DecorLine, ProductWithQuantity } from "@/shared";
 import { PriceProduct } from "./price-product";
+import { ProductInfoItem } from "./product-info-item";
 
 type ProductCardProps = {
   product: ProductWithQuantity;
@@ -32,36 +33,36 @@ export const CatalogProductCard = ({ product }: ProductCardProps) => {
         </Link>
         <DecorLine />
         <div className="flex flex-col gap-1">
-          <dl className="flex items-center gap-2">
-            <dt className="text-black-opacity75 text-base">Power:</dt>
-            <dd className="font-bold text-base">{`${product.power} hp`}</dd>
-          </dl>
-
+          <ProductInfoItem label="Power" value={product.power} text="hp" />
           {product.speed !== undefined && (
-            <dl className="flex items-center gap-2">
-              <dt className="text-black-opacity75 text-base">Top speed:</dt>
-              <dd className="font-bold text-base">{`${product.speed} km/h`}</dd>
-            </dl>
+            <ProductInfoItem
+              label="Top speed"
+              value={product.speed}
+              text="km/h"
+            />
           )}
           {product.acceleration !== undefined && (
-            <dl className="flex items-center gap-2">
-              <dt className="text-black-opacity75 text-base">0-100 km/h:</dt>
-              <dd className="font-bold text-base">{`${product.acceleration} s`}</dd>
-            </dl>
+            <ProductInfoItem
+              label="0-100 km/h"
+              value={product.acceleration}
+              text="s"
+            />
           )}
           {product.engineType === "ENGINE" &&
             product.engineValue !== undefined && (
-              <dl className="flex items-center gap-2">
-                <dt className="text-black-opacity75 text-base">Engine:</dt>
-                <dd className="font-bold text-base">{`${product.engineValue} L`}</dd>
-              </dl>
+              <ProductInfoItem
+                label="Engine"
+                value={product.engineValue}
+                text="L"
+              />
             )}
           {product.engineType === "ELECTRO" &&
             product.batteryCapacity !== undefined && (
-              <dl className="flex items-center gap-2">
-                <dt className="text-black-opacity75 text-base">Battery:</dt>
-                <dd className="font-bold text-base">{`${product.batteryCapacity} kw/h`}</dd>
-              </dl>
+              <ProductInfoItem
+                label="Battery"
+                value={product.batteryCapacity}
+                text="kw/h"
+              />
             )}
         </div>
         <div className="flex items-end justify-between mt-4">

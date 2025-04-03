@@ -30,7 +30,9 @@ export const ProfilePage = () => {
                     className=" rounded-full"
                   />
                   <div className="flex flex-col gap-1">
-                    <p className="font-bold text-2xl">Bodich</p>
+                    <p className="font-bold text-2xl">
+                      {currentUser?.firstName}
+                    </p>
                     <p className="text-black-opacity75">{currentUser?.email}</p>
                   </div>
                 </div>

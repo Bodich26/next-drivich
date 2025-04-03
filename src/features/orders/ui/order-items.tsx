@@ -8,6 +8,7 @@ import {
 import { OrderListProducts } from "./order-list-products";
 import { OrderItemProps } from "../model/orders-type";
 import { useOrdersStatus } from "../model/use-orders-status";
+import { OrderInfoItem } from "./order-info-item";
 
 export const OrderItems = ({ order }: OrderItemProps) => {
   const { colorStatus } = useOrdersStatus(order.status);
@@ -39,46 +40,13 @@ export const OrderItems = ({ order }: OrderItemProps) => {
         <AccordionContent className="flex justify-between align-top py-4">
           <div className="basis-[50%]">
             <dl className="flex flex-col gap-2">
-              <div className="flex items-center gap-2">
-                <dt className="text-base font-medium">First name:</dt>
-                <dd className="text-base text-black-opacity75">
-                  {order.firstName}
-                </dd>
-              </div>
-              <div className="flex items-center gap-2">
-                <dt className="text-base font-medium">Last name:</dt>
-                <dd className="text-base text-black-opacity75">
-                  {order.lastName}
-                </dd>
-              </div>
-              <div className="flex items-center gap-2">
-                <dt className="text-base font-medium">Phone number:</dt>
-                <dd className="text-base text-black-opacity75">
-                  {order.phoneNumber}
-                </dd>
-              </div>
-              <div className="flex items-center gap-2">
-                <dt className="text-base font-medium">Country:</dt>
-                <dd className="text-base text-black-opacity75">
-                  {order.country}
-                </dd>
-              </div>
-              <div className="flex items-center gap-2">
-                <dt className="text-base font-medium">City:</dt>
-                <dd className="text-base text-black-opacity75">{order.city}</dd>
-              </div>
-              <div className="flex items-center gap-2">
-                <dt className="text-base font-medium">Address:</dt>
-                <dd className="text-base text-black-opacity75">
-                  {order.address}
-                </dd>
-              </div>
-              <div className="flex items-center gap-2">
-                <dt className="text-base font-medium">Payment:</dt>
-                <dd className="text-base text-black-opacity75">
-                  {order.payment}
-                </dd>
-              </div>
+              <OrderInfoItem label="First name" value={order.firstName} />
+              <OrderInfoItem label="Last name" value={order.lastName} />
+              <OrderInfoItem label="Phone number" value={order.phoneNumber} />
+              <OrderInfoItem label="Country" value={order.country} />
+              <OrderInfoItem label="City" value={order.city} />
+              <OrderInfoItem label="Address" value={order.address} />
+              <OrderInfoItem label="Payment" value={order.payment} />
             </dl>
           </div>
           <div className="basis-[60%]">

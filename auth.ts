@@ -6,6 +6,7 @@ import authConfig from "./auth.config";
 
 export type ExtendedUser = DefaultSession["user"] & {
   role: Role;
+  firstName: string;
 };
 
 declare module "next-auth" {
@@ -18,6 +19,7 @@ declare module "@auth/core/jwt" {
   interface JWT {
     role?: Role;
     id?: string;
+    firstName: string;
   }
 }
 
@@ -25,7 +27,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
   session: {
     strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60,
+    maxAge: 3 * 24 * 60 * 60,
     updateAge: 24 * 60 * 60,
   },
   callbacks: {
@@ -33,10 +35,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (token) {
         session.user.id = token.id as string;
         session.user.role = token.role as Role;
+        session.user.firstName = token.firstName as string;
       }
 
       console.log(session);
-
       return session;
     },
 
@@ -49,6 +51,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         });
         if (existingUser) {
           token.role = existingUser.role;
+          token.firstName = existingUser.firstName;
         }
       }
       return token;
