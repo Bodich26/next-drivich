@@ -41,35 +41,43 @@ export const OrderItems = ({ order }: OrderItemProps) => {
             <dl className="flex flex-col gap-2">
               <div className="flex items-center gap-2">
                 <dt className="text-base font-medium">First name:</dt>
-                <dd className="text-base text-black-opacity75">Bogdan</dd>
+                <dd className="text-base text-black-opacity75">
+                  {order.firstName}
+                </dd>
               </div>
               <div className="flex items-center gap-2">
                 <dt className="text-base font-medium">Last name:</dt>
-                <dd className="text-base text-black-opacity75">Zhukov</dd>
+                <dd className="text-base text-black-opacity75">
+                  {order.lastName}
+                </dd>
               </div>
               <div className="flex items-center gap-2">
                 <dt className="text-base font-medium">Phone number:</dt>
                 <dd className="text-base text-black-opacity75">
-                  +1 (452) 343-2423
+                  {order.phoneNumber}
                 </dd>
               </div>
               <div className="flex items-center gap-2">
                 <dt className="text-base font-medium">Country:</dt>
-                <dd className="text-base text-black-opacity75">Zimbabwe</dd>
+                <dd className="text-base text-black-opacity75">
+                  {order.country}
+                </dd>
               </div>
               <div className="flex items-center gap-2">
                 <dt className="text-base font-medium">City:</dt>
-                <dd className="text-base text-black-opacity75">Adreon</dd>
+                <dd className="text-base text-black-opacity75">{order.city}</dd>
               </div>
               <div className="flex items-center gap-2">
                 <dt className="text-base font-medium">Address:</dt>
                 <dd className="text-base text-black-opacity75">
-                  43set Mindoleo street
+                  {order.address}
                 </dd>
               </div>
               <div className="flex items-center gap-2">
                 <dt className="text-base font-medium">Payment:</dt>
-                <dd className="text-base text-black-opacity75">Online</dd>
+                <dd className="text-base text-black-opacity75">
+                  {order.payment}
+                </dd>
               </div>
             </dl>
           </div>
@@ -78,7 +86,7 @@ export const OrderItems = ({ order }: OrderItemProps) => {
               <div className="flex justify-between mb-4 font-medium text-base">
                 <span>Total: ${order.totalPrice.toLocaleString("en-US")}</span>
                 <span>
-                  CreateAt: {order.createdAt.toISOString().split("T")[0]}
+                  CreateAt: {order.createdAt.toString().split("T")[0]}
                 </span>
               </div>
               <OrderListProducts orderProducts={order.orderItems} />

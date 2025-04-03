@@ -1,46 +1,17 @@
 "use client";
 
 import { OrderList } from "@/features";
+import { useGetOrders } from "@/features/orders/model/use-get-orders";
 import { Container, useCurrentUser } from "@/shared";
 import { Footer, Header } from "@/widgets";
-
 import Image from "next/image";
-
-const orders = [
-  {
-    id: 10,
-    userId: "cm8a70f7o0000tgpw5g670znh",
-    firstName: "Bogdan",
-    lastName: "Zhukov",
-    phoneNumber: "96045565643654",
-    country: "432423423",
-    city: "34234234",
-    address: "4534534534534",
-    payment: "Online",
-    status: "PENDING",
-    totalPrice: 512000,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: 122,
-    userId: "cm8a70f7o0000tgpw5g670znh",
-    firstName: "Bogdan",
-    lastName: "Zhukov",
-    phoneNumber: "96045565643654",
-    country: "432423423",
-    city: "34234234",
-    address: "4534534534534",
-    payment: "Online",
-    status: "PENDING",
-    totalPrice: 5122000,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-];
 
 export const ProfilePage = () => {
   const currentUser = useCurrentUser();
+  const { orders, isLoading, error } = useGetOrders();
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">

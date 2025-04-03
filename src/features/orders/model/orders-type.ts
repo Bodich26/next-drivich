@@ -25,10 +25,17 @@ type OrderListProductsProps = {
   orderProducts: OrderItemWithProduct[];
 };
 
+type OrdersRes = {
+  error?: string;
+  success?: boolean;
+  orderList: OrderWithProducts[] | [];
+};
+
 export type {
   OrderWithProducts,
   OrderProps,
   OrderItemWithProduct,
   OrderItemProps,
   OrderListProductsProps,
+  OrdersRes,
 };

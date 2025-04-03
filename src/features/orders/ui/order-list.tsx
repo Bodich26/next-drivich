@@ -9,14 +9,14 @@ export const OrderList = ({ orders }: OrderProps) => {
       </div>
       <div className="flex-1 min-h-0 overflow-y-auto ">
         <div className="flex flex-wrap gap-4 p-4">
-          {orders.length > 0 ? (
+          {orders?.length > 0 ? (
             orders.map((order) => {
               return <OrderItems key={order.id} order={order} />;
             })
           ) : (
             <div className="w-full bg-color-white rounded-md text-center p-4 hover-shadow-block">
-              <h1 className="text-xl font-bold mb-1">No products</h1>
-              <p>Oops, looks like you&apos;re out of groceries!</p>
+              <h1 className="text-xl font-bold mb-1">No orders</h1>
+              <p>Oops, looks looks like you don&apos;t have any orders</p>
             </div>
           )}
         </div>

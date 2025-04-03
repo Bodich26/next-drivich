@@ -4,6 +4,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { favoritesApi } from "@/features/favorites";
 import { cartApi } from "@/features/cart";
 import { checkoutApi } from "@/features/checkout";
+import { ordersApi } from "@/features/orders";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     [favoritesApi.reducerPath]: favoritesApi.reducer,
     [cartApi.reducerPath]: cartApi.reducer,
     [checkoutApi.reducerPath]: checkoutApi.reducer,
+    [ordersApi.reducerPath]: ordersApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -19,7 +21,8 @@ export const store = configureStore({
       authApi.middleware,
       favoritesApi.middleware,
       cartApi.middleware,
-      checkoutApi.middleware
+      checkoutApi.middleware,
+      ordersApi.middleware
     ),
 });
 
