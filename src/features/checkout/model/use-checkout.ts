@@ -24,9 +24,9 @@ export const useCheckout = () => {
         setLoading(false);
         setError(response.error);
       }
-    } catch (err: any) {
+    } catch (err: unknown | string) {
       setLoading(false);
-      setError(err?.message || "Unknown error!");
+      setError(String((err as { message: string }).message));
     }
   };
   return { handleCheckout, error, loading, success, setError };

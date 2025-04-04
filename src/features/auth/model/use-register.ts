@@ -28,9 +28,9 @@ export const useRegister = () => {
         setLoading(false);
         setError(response.error);
       }
-    } catch (err: any) {
+    } catch (err: unknown | string) {
       setLoading(false);
-      setError(err?.message || "Unknown error!");
+      setError(String((err as { message: string }).message));
     }
   };
   return { error, success, loading, handleRegister, setError };
