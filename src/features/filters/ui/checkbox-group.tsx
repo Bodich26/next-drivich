@@ -35,10 +35,11 @@ export const CheckboxGroup = ({
     if (defaultValue) {
       defaultValue.forEach(add);
     }
-  }, [defaultValue?.length]);
+  });
 
   React.useEffect(() => {
     onChange?.(Array.from(selected));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected]);
 
   return (

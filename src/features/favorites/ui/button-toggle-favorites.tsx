@@ -19,7 +19,7 @@ export const ButtonToggleFavorites = ({ variant, productId }: IProps) => {
   const isFavorite = favoriteIds.has(productId);
   const currentUser = useCurrentUser();
 
-  let timeoutId: NodeJS.Timeout;
+  const timeoutId = React.useRef<NodeJS.Timeout | null>(null);
 
   const handleClick = async () => {
     if (isCooldown) return;
@@ -32,15 +32,15 @@ export const ButtonToggleFavorites = ({ variant, productId }: IProps) => {
     } else {
       showToast("error", "favorites", error);
     }
-    timeoutId = setTimeout(() => setIsCooldown(false), 5000);
+    timeoutId.current = setTimeout(() => setIsCooldown(false), 5000);
   };
 
   const authToast = () => showToast("auth", "favorites");
 
   React.useEffect(() => {
     return () => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
+      if (timeoutId.current) {
+        clearTimeout(timeoutId.current);
       }
     };
   }, []);
