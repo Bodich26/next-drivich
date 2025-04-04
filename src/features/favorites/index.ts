@@ -1,5 +1,5 @@
 export {
-  default as favoritesApi,
+  favoritesApi,
   useGetFavoritesQuery,
   useAddToFavoritesMutation,
   useRemoveFavoritesMutation,

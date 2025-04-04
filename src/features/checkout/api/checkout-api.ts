@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ConfirmOrderReq, ConfirmOrderRes } from "../model/checkout-type";
 
-const checkoutApi = createApi({
+export const checkoutApi = createApi({
   reducerPath: "checkoutApi",
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_API_URL,
@@ -17,4 +17,3 @@ const checkoutApi = createApi({
   }),
 });
 export const { useConfirmOrderMutation } = checkoutApi;
-export default checkoutApi;

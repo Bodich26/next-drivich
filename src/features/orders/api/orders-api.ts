@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { OrdersRes } from "../model/orders-type";
 
-const ordersApi = createApi({
+export const ordersApi = createApi({
   reducerPath: "ordersApi",
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_API_URL,
@@ -16,4 +16,3 @@ const ordersApi = createApi({
 });
 
 export const { useGetOrdersQuery } = ordersApi;
-export default ordersApi;

@@ -6,7 +6,7 @@ import {
   RegisterResponse,
 } from "../model/auth-type";
 
-const authApi = createApi({
+export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_API_AUTH_URL,
@@ -31,4 +31,3 @@ const authApi = createApi({
 });
 
 export const { useLoginMutation, useRegisterMutation } = authApi;
-export default authApi;

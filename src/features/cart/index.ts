@@ -1,5 +1,5 @@
 export {
-  default as cartApi,
+  cartApi,
   useAddToCartMutation,
   useGetCartQuery,
   useRemoveFromCartMutation,

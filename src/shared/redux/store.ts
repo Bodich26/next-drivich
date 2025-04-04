@@ -1,10 +1,11 @@
-import { authApi } from "@/features/auth";
-import { productsApi } from "@/entities/product";
 import { configureStore } from "@reduxjs/toolkit";
-import { favoritesApi } from "@/features/favorites";
-import { cartApi } from "@/features/cart";
-import { checkoutApi } from "@/features/checkout";
-import { ordersApi } from "@/features/orders";
+
+import { authApi } from "@/features/auth/api/auth-api";
+import { productsApi } from "@/entities/product/api/product-api";
+import { favoritesApi } from "@/features/favorites/api/favorites-api";
+import { cartApi } from "@/features/cart/api/cart-api";
+import { checkoutApi } from "@/features/checkout/api/checkout-api";
+import { ordersApi } from "@/features/orders/api/orders-api";
 
 export const store = configureStore({
   reducer: {

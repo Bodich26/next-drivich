@@ -7,7 +7,7 @@ import {
   RemoveFavoritesReq,
 } from "../model/favorites-type";
 
-const favoritesApi = createApi({
+export const favoritesApi = createApi({
   reducerPath: "favoritesApi",
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_API_URL,
@@ -42,4 +42,3 @@ export const {
   useAddToFavoritesMutation,
   useRemoveFavoritesMutation,
 } = favoritesApi;
-export default favoritesApi;

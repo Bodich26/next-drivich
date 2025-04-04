@@ -9,7 +9,7 @@ import {
   UpCartQuantityReq,
 } from "../model/cart-type";
 
-const cartApi = createApi({
+export const cartApi = createApi({
   reducerPath: "cartApi",
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_API_URL,
@@ -52,4 +52,3 @@ export const {
   useGetCartQuery,
   useUpCartQuantityMutation,
 } = cartApi;
-export default cartApi;
