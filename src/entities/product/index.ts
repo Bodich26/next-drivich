@@ -1,5 +1,5 @@
 export {
-  default as productsApi,
+  productsApi,
   useGetProductsByIdQuery,
   useGetProductsQuery,
 } from "./api/product-api";

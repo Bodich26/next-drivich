@@ -21,7 +21,7 @@ export const PriceProduct = ({
     </span>
   );
 
-  const oldPriceElement = hasDiscount > 0 && (
+  const oldPriceElement = hasDiscount ? (
     <span
       className={cn(
         "text-black/50 line-through",
@@ -30,7 +30,7 @@ export const PriceProduct = ({
     >
       <PriceFormat price={price} />
     </span>
-  );
+  ) : null;
 
   if (variant === "main") {
     return (

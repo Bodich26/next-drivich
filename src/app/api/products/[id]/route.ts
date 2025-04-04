@@ -1,16 +1,16 @@
+"use server";
+
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../../../backend/prisma/prisma-client";
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  const { id } = await params;
-  const productId = parseInt(id);
+export async function GET(req: NextRequest) {
+  const id = req.nextUrl.pathname.split("/").pop();
 
-  if (isNaN(productId)) {
-    return NextResponse.json({ error: "Некорректный ID" }, { status: 400 });
+  if (!id) {
+    return NextResponse.json({ error: "ID не предоставлен" }, { status: 400 });
   }
+
+  const productId = parseInt(id);
 
   try {
     const product = await prisma.product.findUnique({

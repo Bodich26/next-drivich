@@ -17,6 +17,8 @@ export const HomePage = () => {
     setSortOrder,
   } = useGetProducts();
 
+  if (!products) return null;
+
   return (
     <div className="flex flex-col h-screen overflow-hidden">
       <Header />

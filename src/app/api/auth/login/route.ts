@@ -1,4 +1,4 @@
-export const runtime = "nodejs";
+"use server";
 
 import { LoginSchema } from "@/features/auth/model/auth-schema";
 import { NextRequest, NextResponse } from "next/server";

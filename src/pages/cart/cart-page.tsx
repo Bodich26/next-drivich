@@ -10,6 +10,8 @@ export const CartPage = () => {
   const { products, isLoading, error } = useGetCart();
   const { totalPrices } = useCartTotal();
 
+  if (!products) return null;
+
   return (
     <div className="flex flex-col h-screen overflow-hidden">
       <Header />

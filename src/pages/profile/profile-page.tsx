@@ -9,6 +9,7 @@ import Image from "next/image";
 export const ProfilePage = () => {
   const currentUser = useCurrentUser();
   const { orders, isLoading, error } = useGetOrders();
+  if (!orders) return null;
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">

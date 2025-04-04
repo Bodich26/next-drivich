@@ -31,6 +31,7 @@ export const ProductPage = () => {
 
   if (isLoading) return <SkeletonProductPage />;
   if (error) return <DisplayLoadingErrors entities="page" error={error} />;
+  if (!product) return null;
 
   return (
     <>
